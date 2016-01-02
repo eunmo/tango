@@ -13,6 +13,9 @@
 		5450E04D1C37ABB100E5A67B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5450E04C1C37ABB100E5A67B /* Assets.xcassets */; };
 		5450E0501C37ABB100E5A67B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5450E04E1C37ABB100E5A67B /* LaunchScreen.storyboard */; };
 		5450E05B1C37ABB100E5A67B /* TangoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E05A1C37ABB100E5A67B /* TangoTests.swift */; };
+		5450E0661C37ADC100E5A67B /* WordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E0651C37ADC100E5A67B /* WordViewController.swift */; };
+		5450E0681C37C5CB00E5A67B /* LevelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E0671C37C5CB00E5A67B /* LevelTableViewController.swift */; };
+		5450E06A1C37C97A00E5A67B /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E0691C37C97A00E5A67B /* Word.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,9 @@
 		5450E0561C37ABB100E5A67B /* TangoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TangoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5450E05A1C37ABB100E5A67B /* TangoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TangoTests.swift; sourceTree = "<group>"; };
 		5450E05C1C37ABB100E5A67B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5450E0651C37ADC100E5A67B /* WordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordViewController.swift; sourceTree = "<group>"; };
+		5450E0671C37C5CB00E5A67B /* LevelTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelTableViewController.swift; sourceTree = "<group>"; };
+		5450E0691C37C97A00E5A67B /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +86,9 @@
 				5450E0451C37ABB100E5A67B /* AppDelegate.swift */,
 				5450E0471C37ABB100E5A67B /* ViewController.swift */,
 				5450E0491C37ABB100E5A67B /* Main.storyboard */,
+				5450E0671C37C5CB00E5A67B /* LevelTableViewController.swift */,
+				5450E0651C37ADC100E5A67B /* WordViewController.swift */,
+				5450E0691C37C97A00E5A67B /* Word.swift */,
 				5450E04C1C37ABB100E5A67B /* Assets.xcassets */,
 				5450E04E1C37ABB100E5A67B /* LaunchScreen.storyboard */,
 				5450E0511C37ABB100E5A67B /* Info.plist */,
@@ -199,6 +208,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5450E0681C37C5CB00E5A67B /* LevelTableViewController.swift in Sources */,
+				5450E0661C37ADC100E5A67B /* WordViewController.swift in Sources */,
+				5450E06A1C37C97A00E5A67B /* Word.swift in Sources */,
 				5450E0481C37ABB100E5A67B /* ViewController.swift in Sources */,
 				5450E0461C37ABB100E5A67B /* AppDelegate.swift in Sources */,
 			);
