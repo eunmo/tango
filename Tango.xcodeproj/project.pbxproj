@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5450E0461C37ABB100E5A67B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E0451C37ABB100E5A67B /* AppDelegate.swift */; };
-		5450E0481C37ABB100E5A67B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E0471C37ABB100E5A67B /* ViewController.swift */; };
 		5450E04B1C37ABB100E5A67B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5450E0491C37ABB100E5A67B /* Main.storyboard */; };
 		5450E04D1C37ABB100E5A67B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5450E04C1C37ABB100E5A67B /* Assets.xcassets */; };
 		5450E0501C37ABB100E5A67B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5450E04E1C37ABB100E5A67B /* LaunchScreen.storyboard */; };
@@ -16,6 +15,10 @@
 		5450E0661C37ADC100E5A67B /* WordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E0651C37ADC100E5A67B /* WordViewController.swift */; };
 		5450E0681C37C5CB00E5A67B /* LevelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E0671C37C5CB00E5A67B /* LevelTableViewController.swift */; };
 		5450E06A1C37C97A00E5A67B /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E0691C37C97A00E5A67B /* Word.swift */; };
+		5450E06C1C382DE900E5A67B /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 5450E06B1C382DE900E5A67B /* data.json */; };
+		5450E06E1C382DFD00E5A67B /* WordLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E06D1C382DFD00E5A67B /* WordLibrary.swift */; };
+		5450E0701C382E6100E5A67B /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E06F1C382E6100E5A67B /* Level.swift */; };
+		5450E0741C38419500E5A67B /* dummyData.json in Resources */ = {isa = PBXBuildFile; fileRef = 5450E0731C38419500E5A67B /* dummyData.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,7 +34,6 @@
 /* Begin PBXFileReference section */
 		5450E0421C37ABB100E5A67B /* Tango.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tango.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5450E0451C37ABB100E5A67B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		5450E0471C37ABB100E5A67B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5450E04A1C37ABB100E5A67B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5450E04C1C37ABB100E5A67B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5450E04F1C37ABB100E5A67B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -42,6 +44,10 @@
 		5450E0651C37ADC100E5A67B /* WordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordViewController.swift; sourceTree = "<group>"; };
 		5450E0671C37C5CB00E5A67B /* LevelTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelTableViewController.swift; sourceTree = "<group>"; };
 		5450E0691C37C97A00E5A67B /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
+		5450E06B1C382DE900E5A67B /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
+		5450E06D1C382DFD00E5A67B /* WordLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordLibrary.swift; sourceTree = "<group>"; };
+		5450E06F1C382E6100E5A67B /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
+		5450E0731C38419500E5A67B /* dummyData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dummyData.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,11 +90,14 @@
 			isa = PBXGroup;
 			children = (
 				5450E0451C37ABB100E5A67B /* AppDelegate.swift */,
-				5450E0471C37ABB100E5A67B /* ViewController.swift */,
 				5450E0491C37ABB100E5A67B /* Main.storyboard */,
 				5450E0671C37C5CB00E5A67B /* LevelTableViewController.swift */,
 				5450E0651C37ADC100E5A67B /* WordViewController.swift */,
 				5450E0691C37C97A00E5A67B /* Word.swift */,
+				5450E06F1C382E6100E5A67B /* Level.swift */,
+				5450E06D1C382DFD00E5A67B /* WordLibrary.swift */,
+				5450E0731C38419500E5A67B /* dummyData.json */,
+				5450E06B1C382DE900E5A67B /* data.json */,
 				5450E04C1C37ABB100E5A67B /* Assets.xcassets */,
 				5450E04E1C37ABB100E5A67B /* LaunchScreen.storyboard */,
 				5450E0511C37ABB100E5A67B /* Info.plist */,
@@ -191,6 +200,8 @@
 				5450E0501C37ABB100E5A67B /* LaunchScreen.storyboard in Resources */,
 				5450E04D1C37ABB100E5A67B /* Assets.xcassets in Resources */,
 				5450E04B1C37ABB100E5A67B /* Main.storyboard in Resources */,
+				5450E06C1C382DE900E5A67B /* data.json in Resources */,
+				5450E0741C38419500E5A67B /* dummyData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,10 +219,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5450E0701C382E6100E5A67B /* Level.swift in Sources */,
 				5450E0681C37C5CB00E5A67B /* LevelTableViewController.swift in Sources */,
 				5450E0661C37ADC100E5A67B /* WordViewController.swift in Sources */,
+				5450E06E1C382DFD00E5A67B /* WordLibrary.swift in Sources */,
 				5450E06A1C37C97A00E5A67B /* Word.swift in Sources */,
-				5450E0481C37ABB100E5A67B /* ViewController.swift in Sources */,
 				5450E0461C37ABB100E5A67B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -402,6 +414,7 @@
 				5450E0611C37ABB100E5A67B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5450E0621C37ABB100E5A67B /* Build configuration list for PBXNativeTarget "TangoTests" */ = {
 			isa = XCConfigurationList;
@@ -410,6 +423,7 @@
 				5450E0641C37ABB100E5A67B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
