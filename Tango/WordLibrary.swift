@@ -60,12 +60,27 @@ class WordLibrary {
     }
     
     func getWords(indexPath: NSIndexPath) -> [Word] {
+        var words = [Word]()
         let row = indexPath.row
         
         if row < levels.count {
-            return levels[row].words
-        } else {
-            return [Word]()
+            words = levels[row].words.shuffle()
+            
+            let count = words.count
+            if count > 30 {
+                words.removeRange(30..<count)
+            }
         }
+        
+        return words
+    }
+}
+
+extension CollectionType {
+    /// Return a copy of `self` with its elements shuffled
+    func shuffle() -> [Generator.Element] {
+        var list = Array(self)
+        list.shuffleInPlace()
+        return list
     }
 }
