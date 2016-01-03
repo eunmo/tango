@@ -47,6 +47,7 @@ class LevelTableViewController: UITableViewController {
 
         // Configure the cell...
         cell.textLabel?.text = getCellText(indexPath)
+        cell.detailTextLabel?.text = getCellDetail(indexPath)
 
         return cell
     }
@@ -56,6 +57,14 @@ class LevelTableViewController: UITableViewController {
             return wordLibrary!.getLevelName(indexPath)
         } else {
             return "復習"
+        }
+    }
+    
+    func getCellDetail(indexPath: NSIndexPath) -> String {
+        if indexPath.section == 0 {
+            return "\(wordLibrary!.getLevelSize(indexPath)) words"
+        } else {
+            return ""
         }
     }
 

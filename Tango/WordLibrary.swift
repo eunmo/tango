@@ -49,6 +49,16 @@ class WordLibrary {
         }
     }
     
+    func getLevelSize(indexPath: NSIndexPath) -> Int {
+        let row = indexPath.row
+        
+        if row < levels.count {
+            return levels[row].words.count
+        } else {
+            return 0
+        }
+    }
+    
     func getWords(indexPath: NSIndexPath) -> [Word] {
         let row = indexPath.row
         
