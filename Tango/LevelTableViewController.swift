@@ -22,6 +22,14 @@ class LevelTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         wordLibrary = WordLibrary()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "receiveNotification", name: WordLibrary.notificationKey, object: nil)
+    }
+    
+    func receiveNotification() {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.tableView.reloadData()
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,7 +41,7 @@ class LevelTableViewController: UITableViewController {
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 2
+        return wordLibrary!.getLearnedCount() > 0 ? 2 : 1
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -62,9 +70,9 @@ class LevelTableViewController: UITableViewController {
     
     func getCellDetail(indexPath: NSIndexPath) -> String {
         if indexPath.section == 0 {
-            return "\(wordLibrary!.getLevelSize(indexPath)) words"
+            return wordLibrary!.getLevelDetail(indexPath)
         } else {
-            return ""
+            return "\(wordLibrary!.getLearnedCount()) words"
         }
     }
 
@@ -81,6 +89,7 @@ class LevelTableViewController: UITableViewController {
                     let path = tableView.indexPathForSelectedRow!
                     vc.text = getCellText(path)
                     vc.words = wordLibrary!.getWords(path)
+                    vc.wordLibrary = wordLibrary
                 }
             default: break
             }

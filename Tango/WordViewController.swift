@@ -26,6 +26,7 @@ class WordViewController: UIViewController {
     var pass = 0
     var prevWrongCount = 0
     var text = ""
+    var wordLibrary: WordLibrary?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,6 +102,7 @@ class WordViewController: UIViewController {
     }
     
     func dismiss(action: UIAlertAction!) -> Void {
+        wordLibrary!.record(words)
         navigationController!.popViewControllerAnimated(true)
     }
 
