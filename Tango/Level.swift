@@ -112,6 +112,17 @@ class Level: NSObject, NSCoding {
         }
         
         return learnedWords
+    }
+    
+    func getWordsToLearn() -> [Word] {
+        var wordsToLearn = [Word]()
         
+        for word in words {
+            if !word.learned {
+                wordsToLearn.append(word)
+            }
+        }
+        
+        return wordsToLearn
     }
 }

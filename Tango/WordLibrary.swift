@@ -130,7 +130,8 @@ class WordLibrary {
         
         if section == 0 {
             if row < levels.count {
-                words = levels[row].words.shuffle()
+                words = levels[row].getWordsToLearn()
+                words.shuffleInPlace()
             }
         } else {
             assert(getLearnedCount() > 0)
@@ -165,14 +166,5 @@ class WordLibrary {
     
     func notify() {
         NSNotificationCenter.defaultCenter().postNotificationName(WordLibrary.notificationKey, object: self)
-    }
-}
-
-extension CollectionType {
-    /// Return a copy of `self` with its elements shuffled
-    func shuffle() -> [Generator.Element] {
-        var list = Array(self)
-        list.shuffleInPlace()
-        return list
     }
 }
