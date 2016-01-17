@@ -142,7 +142,7 @@ class WordLibrary {
         }
         
         let count = words.count
-        let limit = 20
+        let limit = 30
         
         if count > limit {
             words.removeRange(limit..<count)

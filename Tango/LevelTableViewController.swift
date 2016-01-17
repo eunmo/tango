@@ -95,4 +95,19 @@ class LevelTableViewController: UITableViewController {
             }
         }
     }
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
+        switch identifier {
+        case "Show Words":
+            if let path = tableView.indexPathForSelectedRow {
+                let words = wordLibrary!.getWords(path)
+                if words.isEmpty {
+                    return false
+                }
+            }
+        default: break
+        }
+        
+        return true
+    }
 }
