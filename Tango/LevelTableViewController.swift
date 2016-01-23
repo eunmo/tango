@@ -56,6 +56,7 @@ class LevelTableViewController: UITableViewController {
         // Configure the cell...
         cell.textLabel?.text = getCellText(indexPath)
         cell.detailTextLabel?.text = getCellDetail(indexPath)
+        cell.userInteractionEnabled = getCellEnabled(indexPath)
 
         return cell
     }
@@ -73,6 +74,14 @@ class LevelTableViewController: UITableViewController {
             return wordLibrary!.getLevelDetail(indexPath)
         } else {
             return wordLibrary!.getReviewDetail()
+        }
+    }
+    
+    func getCellEnabled(indexPath: NSIndexPath) -> Bool {
+        if indexPath.section == 0 {
+            return wordLibrary!.getLevelRemainCount(indexPath) > 0
+        } else {
+            return wordLibrary!.getReviewRemainCount() > 0
         }
     }
 
@@ -95,20 +104,5 @@ class LevelTableViewController: UITableViewController {
             default: break
             }
         }
-    }
-    
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool {
-        switch identifier {
-        case "Show Words":
-            if let path = tableView.indexPathForSelectedRow {
-                let words = wordLibrary!.getWords(path)
-                if words.isEmpty {
-                    return false
-                }
-            }
-        default: break
-        }
-        
-        return true
     }
 }

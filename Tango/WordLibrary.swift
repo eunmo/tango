@@ -78,31 +78,34 @@ class WordLibrary {
         return levels.count
     }
     
-    func getLevelName(indexPath: NSIndexPath) -> String {
+    func getLevelFromIndexPath(indexPath: NSIndexPath) -> Level? {
         let row = indexPath.row
         
         if row < levels.count {
-            return levels[row].name
+            return levels[row]
         } else {
-            return ""
+            return nil
         }
     }
     
+    func getLevelName(indexPath: NSIndexPath) -> String {
+        return getLevelFromIndexPath(indexPath)?.name ?? ""
+    }
+    
     func getLevelSize(indexPath: NSIndexPath) -> Int {
-        let row = indexPath.row
-        
-        if row < levels.count {
-            return levels[row].words.count
+        return getLevelFromIndexPath(indexPath)?.words.count ?? 0
+    }
+    
+    func getLevelRemainCount(indexPath: NSIndexPath) -> Int {
+        if let level = getLevelFromIndexPath(indexPath) {
+            return level.words.count - level.getLearnedCount()
         } else {
             return 0
         }
     }
     
     func getLevelDetail(indexPath: NSIndexPath) -> String {
-        let row = indexPath.row
-        
-        if row < levels.count {
-            let level = levels[row]
+        if let level = getLevelFromIndexPath(indexPath) {
             let count = level.words.count
             let learnedCount = level.getLearnedCount()
             
@@ -112,11 +115,15 @@ class WordLibrary {
         }
     }
     
+    func getReviewRemainCount() -> Int {
+        return getWordsForReview().count;
+    }
+    
     func getReviewDetail() -> String {
         let learnedCount = getLearnedCount();
-        let targetCount = getWordsForReview().count;
+        let remainCount = getReviewRemainCount()
         
-        return "\(targetCount)/\(learnedCount) words"
+        return "\(remainCount)/\(learnedCount) words"
     }
     
     func getLearnedCount() -> Int {
@@ -161,11 +168,10 @@ class WordLibrary {
     func getWords(indexPath: NSIndexPath) -> [Word] {
         var words = [Word]()
         let section = indexPath.section
-        let row = indexPath.row
         
         if section == 0 {
-            if row < levels.count {
-                words = levels[row].getWordsToLearn()
+            if let level = getLevelFromIndexPath(indexPath) {
+                words = level.getWordsToLearn()
             }
         } else {
             words = getWordsForReview()
@@ -184,11 +190,7 @@ class WordLibrary {
     
     func record(words: [Word]) {
         for word in words {
-            if word.learned {
-                
-            } else {
-                word.learned = true
-            }
+            word.learned = true
         }
         
         save()
