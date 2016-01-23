@@ -18,6 +18,7 @@ class WordViewController: UIViewController {
     @IBOutlet weak var statusLabel: UILabel!
     @IBOutlet weak var progressLabel: UILabel!
     
+    var review = false
     var showDetails = false
     var words = [Word]()
     var correct = [Word]()
@@ -45,7 +46,11 @@ class WordViewController: UIViewController {
     
     func updateUI() {
         title = text
-        statusLabel.text = "Pass \(pass + 1)" + (pass > 0 ? " - \(prevWrongCount)/\(words.count) wrongs" : "")
+        if review {
+            statusLabel.text = "Review"
+        } else {
+            statusLabel.text = "Pass \(pass + 1)" + (pass > 0 ? " - \(prevWrongCount)/\(words.count) wrongs" : "")
+        }
         progressLabel.text = "\(index + 1)/\(words.count)"
     }
     
@@ -80,6 +85,18 @@ class WordViewController: UIViewController {
     func next() {
         if let word = nextWord() {
             setWord(word)
+        } else if review {
+            for word in correct {
+                word.correct()
+            }
+            
+            for word in incorrect {
+                word.incorrect()
+            }
+            
+            let alertController = UIAlertController(title: "Done", message: "Remembered \(correct.count) words", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: dismiss))
+            presentViewController(alertController, animated: true, completion: nil)
         } else if incorrect.count > 0 {
             let alertController = UIAlertController(title: "Done", message: "\(incorrect.count) wrongs", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "Restart", style: UIAlertActionStyle.Default, handler: restart))

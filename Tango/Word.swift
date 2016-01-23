@@ -17,6 +17,8 @@ class Word: NSObject, NSCoding {
     var yomigana: String
     var meaing: String
     var learned: Bool
+    var streak: Int
+    var lastCorrect: NSDate?
     
     // MARK: Types
     
@@ -24,6 +26,8 @@ class Word: NSObject, NSCoding {
         static let wordKey = "word"
         static let indexKey = "index"
         static let learnedKey = "learned"
+        static let streakKey = "streak"
+        static let lastCorrectKey = "lastCorrect"
     }
     
     init?(index: Int, word: String, yomigana: String, meaning: String) {
@@ -32,6 +36,7 @@ class Word: NSObject, NSCoding {
         self.yomigana = yomigana
         self.meaing = meaning
         self.learned = false
+        self.streak = 0
         
         super.init()
         
@@ -58,15 +63,33 @@ class Word: NSObject, NSCoding {
         aCoder.encodeObject(word, forKey: PropertyKey.wordKey)
         aCoder.encodeInteger(index, forKey: PropertyKey.indexKey)
         aCoder.encodeBool(learned, forKey: PropertyKey.learnedKey)
+        aCoder.encodeInteger(streak, forKey: PropertyKey.streakKey)
+        aCoder.encodeObject(lastCorrect, forKey: PropertyKey.lastCorrectKey)
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
         let word = aDecoder.decodeObjectForKey(PropertyKey.wordKey) as! String
         let index = aDecoder.decodeIntegerForKey(PropertyKey.indexKey)
-        let learned = aDecoder.decodeBoolForKey(PropertyKey.learnedKey)
         
         self.init(index: index, word: word, yomigana: "", meaning: "")
         
-        self.learned = learned
+        self.streak = aDecoder.decodeIntegerForKey(PropertyKey.streakKey)
+        self.lastCorrect = aDecoder.decodeObjectForKey(PropertyKey.lastCorrectKey) as? NSDate
+        self.learned = aDecoder.decodeBoolForKey(PropertyKey.learnedKey)
+        
+        if self.lastCorrect != nil {
+            print("\(self.index) \(self.word) \(self.learned) \(self.streak) \(self.lastCorrect)")
+        }
+    }
+    
+    func correct() {
+        streak++
+        lastCorrect = NSDate()
+        print("Correct: \(index) \(word) \(streak) \(lastCorrect)")
+    }
+    
+    func incorrect() {
+        streak = 0
+        print("Incorrect: \(index) \(word) \(streak) \(lastCorrect)")
     }
 }

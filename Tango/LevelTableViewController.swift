@@ -90,6 +90,7 @@ class LevelTableViewController: UITableViewController {
                     vc.text = getCellText(path)
                     vc.words = wordLibrary!.getWords(path)
                     vc.wordLibrary = wordLibrary
+                    vc.review = path.section == 1
                 }
             default: break
             }

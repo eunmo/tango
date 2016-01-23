@@ -12,6 +12,7 @@ class WordLibrary {
     
     // MARK: Properties
     var levels = [Level]()
+    var testLimit = 30
     
     // MARK: Archiving Paths
     
@@ -131,21 +132,21 @@ class WordLibrary {
         if section == 0 {
             if row < levels.count {
                 words = levels[row].getWordsToLearn()
-                words.shuffleInPlace()
             }
         } else {
             assert(getLearnedCount() > 0)
             
             for level in levels {
-                words.appendContentsOf(level.getLearnedWords())
+                words.appendContentsOf(level.getWordsToReview())
             }
         }
         
-        let count = words.count
-        let limit = 30
+        words.shuffleInPlace()
         
-        if count > limit {
-            words.removeRange(limit..<count)
+        let count = words.count
+        
+        if count > testLimit {
+            words.removeRange(testLimit..<count)
         }
         
         return words

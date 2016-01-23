@@ -102,7 +102,7 @@ class Level: NSObject, NSCoding {
         return count
     }
     
-    func getLearnedWords() -> [Word] {
+    func getWordsToReview() -> [Word] {
         var learnedWords = [Word]()
         
         for word in words {
