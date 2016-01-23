@@ -76,20 +76,15 @@ class Word: NSObject, NSCoding {
         self.streak = aDecoder.decodeIntegerForKey(PropertyKey.streakKey)
         self.lastCorrect = aDecoder.decodeObjectForKey(PropertyKey.lastCorrectKey) as? NSDate
         self.learned = aDecoder.decodeBoolForKey(PropertyKey.learnedKey)
-        
-        if self.lastCorrect != nil {
-            print("\(self.index) \(self.word) \(self.learned) \(self.streak) \(self.lastCorrect)")
-        }
     }
     
     func correct() {
         streak++
         lastCorrect = NSDate()
-        print("Correct: \(index) \(word) \(streak) \(lastCorrect)")
     }
     
     func incorrect() {
         streak = 0
-        print("Incorrect: \(index) \(word) \(streak) \(lastCorrect)")
+        lastCorrect = nil
     }
 }

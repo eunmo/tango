@@ -48,8 +48,6 @@ class WordLibrary {
         } else if let path = NSBundle.mainBundle().pathForResource("dummyData", ofType: "json"), data = NSData(contentsOfFile: path) {
             loadData(data)
         }
-        
-        print(getLearnedCount())
     }
     
     func loadData(data: NSData) {
@@ -114,6 +112,13 @@ class WordLibrary {
         }
     }
     
+    func getReviewDetail() -> String {
+        let learnedCount = getLearnedCount();
+        let targetCount = getWordsForReview().count;
+        
+        return "\(targetCount)/\(learnedCount) words"
+    }
+    
     func getLearnedCount() -> Int {
         var count = 0
         
@@ -122,6 +127,35 @@ class WordLibrary {
         }
         
         return count
+    }
+    
+    func getWordsForReview() -> [Word] {
+        var words = [Word]()
+        var wordsForReview = [Word]()
+        let curDate = NSDate()
+        
+        assert(getLearnedCount() > 0)
+        
+        for level in levels {
+            words.appendContentsOf(level.getWordsToReview())
+        }
+        
+        for word in words {
+            var add = true
+            
+            if let interval = word.lastCorrect?.timeIntervalSinceDate(curDate) {
+                let timeLimit = Double(word.streak) * -86400
+                if (timeLimit < interval) {
+                    add = false
+                }
+            }
+            
+            if add {
+                wordsForReview.append(word)
+            }
+        }
+        
+        return wordsForReview
     }
     
     func getWords(indexPath: NSIndexPath) -> [Word] {
@@ -134,11 +168,7 @@ class WordLibrary {
                 words = levels[row].getWordsToLearn()
             }
         } else {
-            assert(getLearnedCount() > 0)
-            
-            for level in levels {
-                words.appendContentsOf(level.getWordsToReview())
-            }
+            words = getWordsForReview()
         }
         
         words.shuffleInPlace()

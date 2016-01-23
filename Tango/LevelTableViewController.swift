@@ -72,7 +72,7 @@ class LevelTableViewController: UITableViewController {
         if indexPath.section == 0 {
             return wordLibrary!.getLevelDetail(indexPath)
         } else {
-            return "\(wordLibrary!.getLearnedCount()) words"
+            return wordLibrary!.getReviewDetail()
         }
     }
 
