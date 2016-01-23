@@ -91,18 +91,20 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 word.incorrect()
             }
             
-            let alertController = UIAlertController(title: "Done", message: "Remembered \(correct.count) words", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: dismiss))
-            presentViewController(alertController, animated: true, completion: nil)
+            finish()
         } else if incorrect.count > 0 {
-            let alertController = UIAlertController(title: "Done", message: "\(incorrect.count) wrongs", preferredStyle: UIAlertControllerStyle.Alert)
+            let alertController = UIAlertController(title: "\(incorrect.count) wrong", message: "", preferredStyle: UIAlertControllerStyle.Alert)
             alertController.addAction(UIAlertAction(title: "Restart", style: UIAlertActionStyle.Default, handler: restart))
             presentViewController(alertController, animated: true, completion: nil)
         } else {
-            let alertController = UIAlertController(title: "Done", message: "Number of passes: \(pass + 1)", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default, handler: dismiss))
-            presentViewController(alertController, animated: true, completion: nil)
+            finish()
         }
+    }
+    
+    func finish() {
+        let alertController = UIAlertController(title: "\(correct.count) correct", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+        alertController.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.Default, handler: dismiss))
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     func restart(action: UIAlertAction!) -> Void {

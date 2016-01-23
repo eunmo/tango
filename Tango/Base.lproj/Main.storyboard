@@ -55,9 +55,6 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="aj4-9l-EV5">
                                 <rect key="frame" x="20" y="72" width="560" height="167"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="10" id="DEd-d5-3uY"/>
-                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="5" id="0W3-jC-rhV">
                                     <size key="itemSize" width="6.5" height="6.5"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -75,11 +72,6 @@
                                         </view>
                                     </collectionViewCell>
                                 </cells>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="DEd-d5-3uY"/>
-                                    </mask>
-                                </variation>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
