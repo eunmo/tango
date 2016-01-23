@@ -8,15 +8,14 @@
 
 import UIKit
 
-class WordViewController: UIViewController {
+class WordViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     // MARK: Properties
     @IBOutlet weak var yomiganaLabel: UILabel!
     @IBOutlet weak var wordLabel: UILabel!
     @IBOutlet weak var meaningLabel: UILabel!
     
-    @IBOutlet weak var statusLabel: UILabel!
-    @IBOutlet weak var progressLabel: UILabel!
+    @IBOutlet weak var progressCollectionView: UICollectionView!
     
     var review = false
     var showDetails = false
@@ -31,6 +30,9 @@ class WordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        progressCollectionView.delegate = self
+        progressCollectionView.dataSource = self
 
         // Do any additional setup after loading the view.
         if words.count > 0 {
@@ -46,12 +48,7 @@ class WordViewController: UIViewController {
     
     func updateUI() {
         title = text
-        if review {
-            statusLabel.text = "Review"
-        } else {
-            statusLabel.text = "Pass \(pass + 1)" + (pass > 0 ? " - \(prevWrongCount)/\(words.count) wrongs" : "")
-        }
-        progressLabel.text = "\(index + 1)/\(words.count)"
+        progressCollectionView.reloadData()
     }
     
     func getWord() -> Word {
@@ -109,9 +106,10 @@ class WordViewController: UIViewController {
     }
     
     func restart(action: UIAlertAction!) -> Void {
-        pass++
+        pass = 1
         prevWrongCount = incorrect.count
         index = 0
+        
         correct = [Word]()
         incorrect = [Word]()
         words.shuffleInPlace()
@@ -157,6 +155,57 @@ class WordViewController: UIViewController {
     @IBAction func positivieButtonPressed(sender: UIButton) {
         correct.append(getWord())
         next()
+    }
+    
+    // MARK: UICollectionViewDataSource
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return pass + 1
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return words.count
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ProgressCollectionViewCell", forIndexPath: indexPath)
+        
+        // Configure the cell
+        var shrink = false
+        
+        if indexPath.section < pass {
+            if indexPath.row < prevWrongCount {
+                cell.backgroundColor = UIColor.orangeColor()
+            } else {
+                cell.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 1.0, alpha: 1.0)
+            }
+            
+            shrink = true
+        } else {
+            let word = words[indexPath.row]
+            
+            if indexPath.row == index {
+                cell.backgroundColor = UIColor.darkGrayColor()
+            } else if incorrect.contains(word) {
+                cell.backgroundColor = UIColor.orangeColor()
+            } else if correct.contains(word) {
+                cell.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 1.0, alpha: 1.0)
+            } else {
+                cell.backgroundColor = UIColor.lightGrayColor()
+                
+                shrink = true
+            }
+        }
+        
+        if shrink {
+            cell.layer.bounds = CGRect(x: 1.0, y: 1.0, width: 4.5, height: 4.5)
+            cell.layer.cornerRadius = 2.25
+        } else {
+            cell.layer.bounds = CGRect(x: 0, y: 0, width: 6.5, height: 6.5)
+            cell.layer.cornerRadius = 3.25
+        }
+        
+        return cell
     }
 }
 
