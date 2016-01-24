@@ -73,7 +73,7 @@ class Level: NSObject, NSCoding {
             }
         }
         
-        // delete words not in datafile        
+        // delete words not in datafile
         var newWords = [Word]()
         var newWordIndices = [Int:Word]()
         

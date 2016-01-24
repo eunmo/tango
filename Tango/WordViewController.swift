@@ -27,6 +27,7 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var prevWrongCount = 0
     var text = ""
     var wordLibrary: WordLibrary?
+    var startTime: NSDate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +38,14 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
         // Do any additional setup after loading the view.
         if words.count > 0 {
             words.shuffleInPlace()
+            startTime = NSDate()
+            if review {
+                for word in words {
+                    if word.lastCorrect != nil {
+                        print("\(word.word)\t\(word.streak)\t\(word.lastCorrect!)\t\(word.lastCorrect!.timeIntervalSinceDate(startTime!))")
+                    }
+                }
+            }
             setWord(words[0])
         }
     }
@@ -102,7 +111,11 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func finish() {
-        let alertController = UIAlertController(title: "\(correct.count) correct", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+        let duration = Int(-startTime!.timeIntervalSinceNow)
+        let title = String(format: "%d correct in %02d:%02d", arguments: [correct.count, duration / 60, duration % 60])
+        let message = getStreakString()
+        
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         alertController.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.Default, handler: dismiss))
         presentViewController(alertController, animated: true, completion: nil)
     }
@@ -121,6 +134,37 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func dismiss(action: UIAlertAction!) -> Void {
         wordLibrary!.record(words)
         navigationController!.popViewControllerAnimated(true)
+    }
+    
+    func getStreakString() -> String {
+        
+        if !review {
+            return ""
+        }
+        
+        var maxStreak = 0
+        
+        for word in words {
+            if maxStreak < word.streak {
+                maxStreak = word.streak
+            }
+        }
+        
+        var streaks = [Int](count: maxStreak + 1, repeatedValue: 0)
+        
+        for word in words {
+            streaks[maxStreak - word.streak]++
+        }
+        
+        var string = "Streaks"
+        
+        for (index, streak) in streaks.enumerate() {
+            if streak > 0 {
+                string += String(format: "\n%02d:\t%02d", arguments: [maxStreak - index, streak])
+            }
+        }
+        
+        return string
     }
 
     // MARK: - Navigation
