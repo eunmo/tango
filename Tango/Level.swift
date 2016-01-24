@@ -72,6 +72,19 @@ class Level: NSObject, NSCoding {
                 addWord(newWord)
             }
         }
+        
+        // delete words not in datafile        
+        var newWords = [Word]()
+        var newWordIndices = [Int:Word]()
+        
+        for newWord in words {
+            let word = getWord(newWord.index)!
+            newWords.append(word)
+            newWordIndices[word.index] = word
+        }
+        
+        self.words = newWords
+        self.wordIndices = newWordIndices
     }
     
     func encodeWithCoder(aCoder: NSCoder) {
