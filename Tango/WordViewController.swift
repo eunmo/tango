@@ -255,6 +255,8 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 cell.backgroundColor = UIColor.orangeColor()
             } else if correct.contains(word) {
                 cell.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 1.0, alpha: 1.0)
+                
+                shrink = true
             } else {
                 cell.backgroundColor = UIColor.lightGrayColor()
                 

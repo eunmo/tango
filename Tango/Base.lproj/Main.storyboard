@@ -100,7 +100,7 @@
                         </connections>
                     </view>
                     <navigationItem key="navigationItem" id="mXq-G5-zv8">
-                        <barButtonItem key="rightBarButtonItem" systemItem="rewind" id="jpa-QH-Vyx">
+                        <barButtonItem key="rightBarButtonItem" title="Prev" id="jpa-QH-Vyx">
                             <connections>
                                 <action selector="prevButtonPressed:" destination="BYZ-38-t0r" id="ms9-d0-Gne"/>
                             </connections>
