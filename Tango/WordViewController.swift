@@ -88,6 +88,21 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return nil
     }
     
+    func prev() {
+        if index > 0 {
+            index--
+            let word = words[index]
+            
+            if correct.contains(word) {
+                correct.removeLast()
+            } else if incorrect.contains(word) {
+                incorrect.removeLast()
+            }
+            
+            setWord(word)
+        }
+    }
+    
     func next() {
         if let word = nextWord() {
             setWord(word)
@@ -201,6 +216,10 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBAction func positivieButtonPressed(sender: UIButton) {
         correct.append(getWord())
         next()
+    }
+    
+    @IBAction func prevButtonPressed(sender: UIBarButtonItem) {
+        prev()
     }
     
     // MARK: UICollectionViewDataSource

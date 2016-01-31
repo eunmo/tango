@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="x6b-GF-eyd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="x6b-GF-eyd">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -99,7 +99,13 @@
                             <outletCollection property="gestureRecognizers" destination="pU5-rD-IYQ" appends="YES" id="Byf-V7-DOH"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="mXq-G5-zv8"/>
+                    <navigationItem key="navigationItem" id="mXq-G5-zv8">
+                        <barButtonItem key="rightBarButtonItem" systemItem="rewind" id="jpa-QH-Vyx">
+                            <connections>
+                                <action selector="prevButtonPressed:" destination="BYZ-38-t0r" id="ms9-d0-Gne"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="meaningLabel" destination="vvV-Sv-3qv" id="qKx-em-3fs"/>
                         <outlet property="progressCollectionView" destination="aj4-9l-EV5" id="oGT-7y-rTt"/>
