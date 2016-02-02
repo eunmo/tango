@@ -51,17 +51,23 @@ class WordLibrary {
     }
     
     func loadData(data: NSData) {
+        var newLevels = [Level]()
+        
         if let jsonData = try! NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as? NSArray {
             for levelJson in jsonData as! [NSDictionary] {
                 if let newlevel = Level(json: levelJson) {
+                    print(newlevel.name)
                     if let oldLevel = getLevelByName(newlevel.name) {
                         oldLevel.update(newlevel.words)
+                        newLevels.append(oldLevel)
                     } else {
-                        levels.append(newlevel)
+                        newLevels.append(newlevel)
                     }
                 }
             }
         }
+        
+        levels = newLevels
     }
     
     func getLevelByName(name: String) -> Level? {
