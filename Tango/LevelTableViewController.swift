@@ -84,6 +84,10 @@ class LevelTableViewController: UITableViewController {
             return wordLibrary!.getReviewRemainCount() > 0
         }
     }
+    
+    @IBAction func refresh(sender: UIBarButtonItem) {
+        tableView.reloadData()
+    }
 
     // MARK: - Navigation
 
