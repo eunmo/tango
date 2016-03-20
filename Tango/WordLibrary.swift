@@ -121,14 +121,28 @@ class WordLibrary {
     }
     
     func getReviewRemainCount() -> Int {
-        return getWordsForReview().count;
+        return getWordsForReview().count
+    }
+    
+    func getReviewNegativeSum() -> Int {
+        let words = getWordsForReview()
+        var sum = 0
+        
+        for word in words {
+            if word.streak < 0 {
+                sum -= word.streak
+            }
+        }
+        
+        return sum
     }
     
     func getReviewDetail() -> String {
-        let learnedCount = getLearnedCount();
+        let learnedCount = getLearnedCount()
         let remainCount = getReviewRemainCount()
+        let negativeSum = getReviewNegativeSum()
         
-        return "\(remainCount)/\(learnedCount) words"
+        return "\(remainCount)+\(negativeSum)/\(learnedCount) words"
     }
     
     func getLearnedCount() -> Int {
