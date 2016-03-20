@@ -158,14 +158,19 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
         
         var maxStreak = 0
+        var minStreak = 0
         
         for word in words {
             if maxStreak < word.streak {
                 maxStreak = word.streak
             }
+            
+            if minStreak > word.streak {
+                minStreak = word.streak
+            }
         }
         
-        var streaks = [Int](count: maxStreak + 1, repeatedValue: 0)
+        var streaks = [Int](count: maxStreak - minStreak + 1, repeatedValue: 0)
         
         for word in words {
             streaks[maxStreak - word.streak]++
@@ -174,7 +179,7 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
         var string = "Streaks"
         
         for (index, streak) in streaks.enumerate() {
-            if streak > 0 {
+            if streak != 0 {
                 string += String(format: "\n%02d:\t%02d", arguments: [maxStreak - index, streak])
             }
         }
