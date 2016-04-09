@@ -23,7 +23,7 @@ class LevelTableViewController: UITableViewController {
         
         wordLibrary = WordLibrary()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "receiveNotification", name: WordLibrary.notificationKey, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LevelTableViewController.receiveNotification), name: WordLibrary.notificationKey, object: nil)
     }
     
     func receiveNotification() {
@@ -104,6 +104,13 @@ class LevelTableViewController: UITableViewController {
                     vc.words = wordLibrary!.getWords(path)
                     vc.wordLibrary = wordLibrary
                     vc.review = path.section == 1
+                }
+            case "Show Statistics":
+                print("show statistics!!")
+                if let vc = segue.destinationViewController as? StatsTableViewController {
+                    print("show statistics")
+                    vc.allWords = wordLibrary!.getAllLearnedWords()
+                    vc.wordsToReview = wordLibrary!.getWordsForReview()
                 }
             default: break
             }

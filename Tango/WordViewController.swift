@@ -79,7 +79,7 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func nextWord() -> Word? {
         if index + 1 < words.count {
-            index++
+            index += 1
             return words[index]
         } else {
             assert(correct.count + incorrect.count == words.count)
@@ -90,7 +90,7 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func prev() {
         if index > 0 {
-            index--
+            index -= 1
             let word = words[index]
             
             if correct.contains(word) {
@@ -173,7 +173,7 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
         var streaks = [Int](count: maxStreak - minStreak + 1, repeatedValue: 0)
         
         for word in words {
-            streaks[maxStreak - word.streak]++
+            streaks[maxStreak - word.streak] += 1
         }
         
         var string = "Streaks"

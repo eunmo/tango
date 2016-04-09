@@ -108,7 +108,7 @@ class Level: NSObject, NSCoding {
         
         for word in words {
             if word.learned {
-                count++;
+                count += 1;
             }
         }
         

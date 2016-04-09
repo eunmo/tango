@@ -79,15 +79,15 @@ class Word: NSObject, NSCoding {
     }
     
     func correct() {
-        streak++
+        streak += 1
         lastCorrect = NSDate()
     }
     
     func incorrect() {
         if (streak > 0) {
-            streak = -1;
+            streak = -1
         } else {
-            streak--;
+            streak -= 1
         }
         lastCorrect = nil
     }

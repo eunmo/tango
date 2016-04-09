@@ -188,6 +188,16 @@ class WordLibrary {
         return wordsForReview
     }
     
+    func getAllLearnedWords() -> [Word] {
+        var words = [Word]()
+        
+        for level in levels {
+            words.appendContentsOf(level.getWordsToReview())
+        }
+        
+        return words
+    }
+    
     func getWords(indexPath: NSIndexPath) -> [Word] {
         var words = [Word]()
         let section = indexPath.section
