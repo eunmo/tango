@@ -39,13 +39,13 @@ class StatsTableViewController: UITableViewController {
         learnedCount = [Int](count: max - min + 1, repeatedValue: 0)
         
         for word in allWords {
-            learnedCount[max - word.streak] += 1
+            learnedCount[word.streak - min] += 1
         }
         
         reviewCount = [Int](count: max - min + 1, repeatedValue: 0)
         
         for word in wordsToReview {
-            reviewCount[max - word.streak] += 1
+            reviewCount[word.streak - min] += 1
         }
         
         print("max:\(max) min:\(min)")
@@ -75,7 +75,7 @@ class StatsTableViewController: UITableViewController {
         
         // Configure the cell...
         let index = indexPath.row
-        let streak = max - index
+        let streak = index + min
         cell.textLabel?.text = "\(streak)"
         
         if streak > 0 {

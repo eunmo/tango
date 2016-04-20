@@ -175,7 +175,7 @@ class WordLibrary {
             
             if let interval = word.lastCorrect?.timeIntervalSinceDate(curDate) {
                 let timeLimit = Double(word.streak) * -86400
-                if (timeLimit < interval) {
+                if (timeLimit < interval || word.streak > 10) {
                     add = false
                 }
             }
