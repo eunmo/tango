@@ -15,7 +15,7 @@ class Word: NSObject, NSCoding {
     let index: Int
     var word: String
     var yomigana: String
-    var meaing: String
+    var meaning: String
     var learned: Bool
     var streak: Int
     var lastCorrect: NSDate?
@@ -25,6 +25,8 @@ class Word: NSObject, NSCoding {
     struct PropertyKey {
         static let wordKey = "word"
         static let indexKey = "index"
+        static let yomiganaKey = "yomigana"
+        static let meaningKey = "meaning"
         static let learnedKey = "learned"
         static let streakKey = "streak"
         static let lastCorrectKey = "lastCorrect"
@@ -34,7 +36,7 @@ class Word: NSObject, NSCoding {
         self.index = index
         self.word = word
         self.yomigana = yomigana
-        self.meaing = meaning
+        self.meaning = meaning
         self.learned = false
         self.streak = 0
         
@@ -54,14 +56,22 @@ class Word: NSObject, NSCoding {
     }
     
     func update(newWord: Word) {
+        if (word != newWord.word || yomigana != newWord.yomigana) {// || meaning != newWord.meaning) {
+            print ("Y \(index) w\(word) nw\(newWord.word) y\(yomigana) ny\(newWord.yomigana) m\(meaning) nm\(newWord.meaning)")
+        }
+        if (word != newWord.word || meaning != newWord.meaning) {
+            print ("M \(index) w\(word) nw\(newWord.word) y\(yomigana) ny\(newWord.yomigana) m\(meaning) nm\(newWord.meaning)")
+        }
         word = newWord.word
         yomigana = newWord.yomigana
-        meaing = newWord.meaing
+        meaning = newWord.meaning
     }
     
     func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(word, forKey: PropertyKey.wordKey)
         aCoder.encodeInteger(index, forKey: PropertyKey.indexKey)
+        aCoder.encodeObject(yomigana, forKey: PropertyKey.yomiganaKey)
+        aCoder.encodeObject(meaning, forKey: PropertyKey.meaningKey)
         aCoder.encodeBool(learned, forKey: PropertyKey.learnedKey)
         aCoder.encodeInteger(streak, forKey: PropertyKey.streakKey)
         aCoder.encodeObject(lastCorrect, forKey: PropertyKey.lastCorrectKey)
@@ -70,8 +80,10 @@ class Word: NSObject, NSCoding {
     required convenience init?(coder aDecoder: NSCoder) {
         let word = aDecoder.decodeObjectForKey(PropertyKey.wordKey) as! String
         let index = aDecoder.decodeIntegerForKey(PropertyKey.indexKey)
+        let yomigana = aDecoder.decodeObjectForKey(PropertyKey.yomiganaKey) as? String ?? ""
+        let meaning = aDecoder.decodeObjectForKey(PropertyKey.meaningKey) as? String ?? ""
         
-        self.init(index: index, word: word, yomigana: "", meaning: "")
+        self.init(index: index, word: word, yomigana: yomigana, meaning: meaning)
         
         self.streak = aDecoder.decodeIntegerForKey(PropertyKey.streakKey)
         self.lastCorrect = aDecoder.decodeObjectForKey(PropertyKey.lastCorrectKey) as? NSDate

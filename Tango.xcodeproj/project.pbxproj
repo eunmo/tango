@@ -20,6 +20,7 @@
 		5450E0701C382E6100E5A67B /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E06F1C382E6100E5A67B /* Level.swift */; };
 		5450E0741C38419500E5A67B /* dummyData.json in Resources */ = {isa = PBXBuildFile; fileRef = 5450E0731C38419500E5A67B /* dummyData.json */; };
 		54BE55DD1CB8C6C3002E53F3 /* StatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BE55DC1CB8C6C3002E53F3 /* StatsTableViewController.swift */; };
+		54BE55DF1CD658DA002E53F3 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BE55DE1CD658DA002E53F3 /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		5450E06F1C382E6100E5A67B /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		5450E0731C38419500E5A67B /* dummyData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dummyData.json; sourceTree = "<group>"; };
 		54BE55DC1CB8C6C3002E53F3 /* StatsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsTableViewController.swift; sourceTree = "<group>"; };
+		54BE55DE1CD658DA002E53F3 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = ../../ChartWatch/ChartWatch/SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				5450E0451C37ABB100E5A67B /* AppDelegate.swift */,
+				54BE55DE1CD658DA002E53F3 /* SwiftyJSON.swift */,
 				5450E0491C37ABB100E5A67B /* Main.storyboard */,
 				5450E0671C37C5CB00E5A67B /* LevelTableViewController.swift */,
 				5450E0651C37ADC100E5A67B /* WordViewController.swift */,
@@ -225,6 +228,7 @@
 				5450E0701C382E6100E5A67B /* Level.swift in Sources */,
 				5450E0681C37C5CB00E5A67B /* LevelTableViewController.swift in Sources */,
 				54BE55DD1CB8C6C3002E53F3 /* StatsTableViewController.swift in Sources */,
+				54BE55DF1CD658DA002E53F3 /* SwiftyJSON.swift in Sources */,
 				5450E0661C37ADC100E5A67B /* WordViewController.swift in Sources */,
 				5450E06E1C382DFD00E5A67B /* WordLibrary.swift in Sources */,
 				5450E06A1C37C97A00E5A67B /* Word.swift in Sources */,

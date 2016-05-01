@@ -24,12 +24,23 @@ class LevelTableViewController: UITableViewController {
         wordLibrary = WordLibrary()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LevelTableViewController.receiveNotification), name: WordLibrary.notificationKey, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LevelTableViewController.receiveNetNotification), name: WordLibrary.networkNotificationKey, object: nil)
     }
     
     func receiveNotification() {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             self.tableView.reloadData()
         })
+    }
+    
+    func receiveNetNotification() {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            let alertController = UIAlertController(title: "Sync done", message: "", preferredStyle: UIAlertControllerStyle.Alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+        })
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -89,6 +100,10 @@ class LevelTableViewController: UITableViewController {
         tableView.reloadData()
     }
 
+    @IBAction func sync(sender: UIBarButtonItem) {
+        wordLibrary!.sync()
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation

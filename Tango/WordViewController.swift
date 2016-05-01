@@ -72,7 +72,7 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         wordLabel.text = word.word
         yomiganaLabel.text = word.yomigana
-        meaningLabel.text = word.meaing
+        meaningLabel.text = word.meaning
         
         updateUI()
     }

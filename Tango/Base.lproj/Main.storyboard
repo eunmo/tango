@@ -217,6 +217,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="cNN-OQ-atP">
+                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="RNt-u7-hMC">
+                            <connections>
+                                <action selector="sync:" destination="l42-gn-t64" id="ysB-R9-bSB"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="pLo-xs-7ir">
                             <connections>
                                 <action selector="refresh:" destination="l42-gn-t64" id="ZtN-jS-zjX"/>

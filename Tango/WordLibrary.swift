@@ -13,6 +13,7 @@ class WordLibrary {
     // MARK: Properties
     var levels = [Level]()
     var testLimit = 30
+    let dateFormatter: NSDateFormatter = NSDateFormatter()
     
     // MARK: Archiving Paths
     
@@ -21,7 +22,9 @@ class WordLibrary {
     
     // MARK: Notification Key
     
-    static let notificationKey = "songLibraryNotificationKey"
+    static let notificationKey = "wordLibraryNotificationKey"
+    static let networkNotificationKey = "wordLibraryNetworkNotificationKey"
+    static let serverAddress = "http://211.200.135.97:3010"
     
     init() {
         load()
@@ -42,31 +45,6 @@ class WordLibrary {
         if savedLevels != nil {
             levels = savedLevels!
         }
-        
-        if let path = NSBundle.mainBundle().pathForResource("data", ofType: "json"), data = NSData(contentsOfFile: path) {
-            loadData(data)
-        } else if let path = NSBundle.mainBundle().pathForResource("dummyData", ofType: "json"), data = NSData(contentsOfFile: path) {
-            loadData(data)
-        }
-    }
-    
-    func loadData(data: NSData) {
-        var newLevels = [Level]()
-        
-        if let jsonData = try! NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments) as? NSArray {
-            for levelJson in jsonData as! [NSDictionary] {
-                if let newlevel = Level(json: levelJson) {
-                    if let oldLevel = getLevelByName(newlevel.name) {
-                        oldLevel.update(newlevel.words)
-                        newLevels.append(oldLevel)
-                    } else {
-                        newLevels.append(newlevel)
-                    }
-                }
-            }
-        }
-        
-        levels = newLevels
     }
     
     func getLevelByName(name: String) -> Level? {
@@ -139,13 +117,14 @@ class WordLibrary {
     
     func getReviewDetail() -> String {
         let learnedCount = getLearnedCount()
+        let doneCount = getDoneCount()
         let remainCount = getReviewRemainCount()
         let negativeSum = getReviewNegativeSum()
         
         if negativeSum > 0 {
-            return "\(remainCount)+\(negativeSum)/\(learnedCount) words"
+            return "\(remainCount)+\(negativeSum)/\(learnedCount - doneCount)+\(doneCount) words"
         } else {
-            return "\(remainCount)/\(learnedCount) words"
+            return "\(remainCount)/\(learnedCount - doneCount)+\(doneCount) words"
         }
     }
     
@@ -154,6 +133,20 @@ class WordLibrary {
         
         for level in levels {
             count += level.getLearnedCount()
+        }
+        
+        return count
+    }
+    
+    func getDoneCount() -> Int {
+        var count = 0
+        
+        for level in levels {
+            for word in level.words {
+                if (word.streak > 10) {
+                    count += 1
+                }
+            }
         }
         
         return count
@@ -232,5 +225,85 @@ class WordLibrary {
     
     func notify() {
         NSNotificationCenter.defaultCenter().postNotificationName(WordLibrary.notificationKey, object: self)
+    }
+    
+    func toJSON() -> String {
+        var json = "["
+        var first = true
+        
+        for level in levels {
+            for word in level.words {
+                
+                if (first) {
+                    json += "\n{"
+                    first = false
+                } else {
+                    json += "},\n{"
+                }
+                
+                json += "\"Level\":\"\(level.name)\",\"index\":\(word.index),\"streak\":\(word.streak)"
+                
+                if let lastCorrect = word.lastCorrect {
+                    json += ",\"lastCorrect\":\"\(dateFormatter.stringFromDate(lastCorrect))\""
+                }
+            }
+        }
+        
+        json += "}]"
+        
+        return json
+    }
+    
+    func getWord(levelName: String, index: Int) -> Word? {
+        for level in levels {
+            if (level.name == levelName) {
+                return level.getWord(index)
+            }
+        }
+        
+        return nil
+    }
+    
+    func sync() {
+        let urlAsString = WordLibrary.serverAddress + "/sync"
+        let url = NSURL(string: urlAsString)!
+        let urlSession = NSURLSession.sharedSession()
+        
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = "PUT"
+        request.HTTPBody = toJSON().dataUsingEncoding(NSUTF8StringEncoding)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let task = urlSession.dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
+            if error != nil {
+                print ("\(error)")
+            } else {
+                print ("put successful")
+                
+                let jsonData = JSON(data: data!)
+                
+                for (_, json) in jsonData {
+                    let level = json["Level"].stringValue
+                    let index = json["index"].intValue
+                    let word = json["word"].stringValue
+                    let yomigana = json["yomigana"].stringValue
+                    let meaning = json["meaning"].stringValue
+                    
+                    let foundWord = self.getWord(level, index: index)
+                    let newWord = Word(index: 0, word: word, yomigana: yomigana, meaning: meaning)
+                    foundWord?.update(newWord!)
+                    
+                }
+                
+                self.save()
+                self.notifyNetworkDone()
+                
+            }
+        })
+        task.resume()
+    }
+    
+    func notifyNetworkDone() {
+        NSNotificationCenter.defaultCenter().postNotificationName(WordLibrary.networkNotificationKey, object: self)
     }
 }
