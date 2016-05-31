@@ -56,12 +56,6 @@ class Word: NSObject, NSCoding {
     }
     
     func update(newWord: Word) {
-        if (word != newWord.word || yomigana != newWord.yomigana) {// || meaning != newWord.meaning) {
-            print ("Y \(index) w\(word) nw\(newWord.word) y\(yomigana) ny\(newWord.yomigana) m\(meaning) nm\(newWord.meaning)")
-        }
-        if (word != newWord.word || meaning != newWord.meaning) {
-            print ("M \(index) w\(word) nw\(newWord.word) y\(yomigana) ny\(newWord.yomigana) m\(meaning) nm\(newWord.meaning)")
-        }
         word = newWord.word
         yomigana = newWord.yomigana
         meaning = newWord.meaning

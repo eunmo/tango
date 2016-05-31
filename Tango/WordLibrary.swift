@@ -13,6 +13,7 @@ class WordLibrary {
     // MARK: Properties
     var levels = [Level]()
     var testLimit = 30
+    let refHour = 5
     let dateFormatter: NSDateFormatter = NSDateFormatter()
     
     // MARK: Archiving Paths
@@ -27,6 +28,7 @@ class WordLibrary {
     static let serverAddress = "http://211.200.135.97:3010"
     
     init() {
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         load()
         save()
     }
@@ -156,8 +158,17 @@ class WordLibrary {
         var words = [Word]()
         var wordsForReview = [Word]()
         let curDate = NSDate()
+        let calendar = NSCalendar.currentCalendar()
+        let dateComponents = calendar.components([NSCalendarUnit.Day, NSCalendarUnit.Month, NSCalendarUnit.Year, NSCalendarUnit.Hour], fromDate: curDate)
         
-        assert(getLearnedCount() > 0)
+        if (dateComponents.hour < refHour) {
+            dateComponents.hour = refHour
+        }
+        else {
+            dateComponents.hour = refHour
+            dateComponents.day += 1
+        }
+        let refDate = calendar.dateFromComponents(dateComponents)!
         
         for level in levels {
             words.appendContentsOf(level.getWordsToReview())
@@ -166,7 +177,7 @@ class WordLibrary {
         for word in words {
             var add = true
             
-            if let interval = word.lastCorrect?.timeIntervalSinceDate(curDate) {
+            if let interval = word.lastCorrect?.timeIntervalSinceDate(refDate) {
                 let timeLimit = Double(word.streak) * -86400
                 if (timeLimit < interval || word.streak > 10) {
                     add = false
@@ -241,7 +252,7 @@ class WordLibrary {
                     json += "},\n{"
                 }
                 
-                json += "\"Level\":\"\(level.name)\",\"index\":\(word.index),\"streak\":\(word.streak)"
+                json += "\"Level\":\"\(level.name)\",\"index\":\(word.index),\"streak\":\(word.streak),\"learned\":\(word.learned)"
                 
                 if let lastCorrect = word.lastCorrect {
                     json += ",\"lastCorrect\":\"\(dateFormatter.stringFromDate(lastCorrect))\""
