@@ -300,15 +300,23 @@ class WordLibrary {
                     let yomigana = json["yomigana"].stringValue
                     let meaning = json["meaning"].stringValue
                     
-                    let foundWord = self.getWord(level, index: index)
-                    let newWord = Word(index: 0, word: word, yomigana: yomigana, meaning: meaning)
-                    foundWord?.update(newWord!)
+                    let newWord = Word(index: index, word: word, yomigana: yomigana, meaning: meaning)!
                     
+                    if let foundWord = self.getWord(level, index: index) {
+                        foundWord.update(newWord)
+                    } else {
+                        print (newWord.index)
+                        if let lv = self.getLevelByName(level) {
+                            lv.addWord(newWord)
+                        } else if let newLevel = Level(name: level) {
+                            newLevel.addWord(newWord)
+                            self.levels.insert(newLevel, atIndex: 0)
+                        }
+                    }
                 }
                 
                 self.save()
                 self.notifyNetworkDone()
-                
             }
         })
         task.resume()
