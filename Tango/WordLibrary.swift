@@ -292,6 +292,7 @@ class WordLibrary {
                 print ("put successful")
                 
                 let jsonData = JSON(data: data!)
+                var words = [String:[Word]]()
                 
                 for (_, json) in jsonData {
                     let level = json["Level"].stringValue
@@ -300,19 +301,17 @@ class WordLibrary {
                     let yomigana = json["yomigana"].stringValue
                     let meaning = json["meaning"].stringValue
                     
-                    let newWord = Word(index: index, word: word, yomigana: yomigana, meaning: meaning)!
-                    
-                    if let foundWord = self.getWord(level, index: index) {
-                        foundWord.update(newWord)
-                    } else {
-                        print (newWord.index)
-                        if let lv = self.getLevelByName(level) {
-                            lv.addWord(newWord)
-                        } else if let newLevel = Level(name: level) {
-                            newLevel.addWord(newWord)
-                            self.levels.insert(newLevel, atIndex: 0)
-                        }
+                    if words[level] == nil {
+                        words[level] = []
                     }
+                    
+                    let newWord = Word(index: index, word: word, yomigana: yomigana, meaning: meaning)!
+                    words[level]!.append(newWord)
+                }
+                
+                for (level, array) in words {
+                    print ("\(level) \(array.count) words")
+                    self.getLevelByName(level)?.update(array)
                 }
                 
                 self.save()
