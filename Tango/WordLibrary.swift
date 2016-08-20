@@ -109,8 +109,8 @@ class WordLibrary {
         var sum = 0
         
         for word in words {
-            if word.streak < 0 {
-                sum -= word.streak
+            if word.streak <= 0 {
+                sum += 1
             }
         }
         
@@ -124,7 +124,7 @@ class WordLibrary {
         let negativeSum = getReviewNegativeSum()
         
         if negativeSum > 0 {
-            return "\(remainCount)+\(negativeSum)/\(learnedCount - doneCount)+\(doneCount) words"
+            return "\(remainCount - negativeSum)+\(negativeSum)/\(learnedCount - doneCount)+\(doneCount) words"
         } else {
             return "\(remainCount)/\(learnedCount - doneCount)+\(doneCount) words"
         }
