@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		542800461D9825F20003E854 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542800451D9825F20003E854 /* SwiftyJSON.swift */; };
 		5450E0461C37ABB100E5A67B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E0451C37ABB100E5A67B /* AppDelegate.swift */; };
 		5450E04B1C37ABB100E5A67B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5450E0491C37ABB100E5A67B /* Main.storyboard */; };
 		5450E04D1C37ABB100E5A67B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5450E04C1C37ABB100E5A67B /* Assets.xcassets */; };
@@ -15,12 +16,10 @@
 		5450E0661C37ADC100E5A67B /* WordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E0651C37ADC100E5A67B /* WordViewController.swift */; };
 		5450E0681C37C5CB00E5A67B /* LevelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E0671C37C5CB00E5A67B /* LevelTableViewController.swift */; };
 		5450E06A1C37C97A00E5A67B /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E0691C37C97A00E5A67B /* Word.swift */; };
-		5450E06C1C382DE900E5A67B /* data.json in Resources */ = {isa = PBXBuildFile; fileRef = 5450E06B1C382DE900E5A67B /* data.json */; };
 		5450E06E1C382DFD00E5A67B /* WordLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E06D1C382DFD00E5A67B /* WordLibrary.swift */; };
 		5450E0701C382E6100E5A67B /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E06F1C382E6100E5A67B /* Level.swift */; };
 		5450E0741C38419500E5A67B /* dummyData.json in Resources */ = {isa = PBXBuildFile; fileRef = 5450E0731C38419500E5A67B /* dummyData.json */; };
 		54BE55DD1CB8C6C3002E53F3 /* StatsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BE55DC1CB8C6C3002E53F3 /* StatsTableViewController.swift */; };
-		54BE55DF1CD658DA002E53F3 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54BE55DE1CD658DA002E53F3 /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		542800451D9825F20003E854 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		5450E0421C37ABB100E5A67B /* Tango.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tango.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5450E0451C37ABB100E5A67B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5450E04A1C37ABB100E5A67B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -46,12 +46,10 @@
 		5450E0651C37ADC100E5A67B /* WordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordViewController.swift; sourceTree = "<group>"; };
 		5450E0671C37C5CB00E5A67B /* LevelTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelTableViewController.swift; sourceTree = "<group>"; };
 		5450E0691C37C97A00E5A67B /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
-		5450E06B1C382DE900E5A67B /* data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = data.json; sourceTree = "<group>"; };
 		5450E06D1C382DFD00E5A67B /* WordLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordLibrary.swift; sourceTree = "<group>"; };
 		5450E06F1C382E6100E5A67B /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		5450E0731C38419500E5A67B /* dummyData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dummyData.json; sourceTree = "<group>"; };
 		54BE55DC1CB8C6C3002E53F3 /* StatsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatsTableViewController.swift; sourceTree = "<group>"; };
-		54BE55DE1CD658DA002E53F3 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = ../../ChartWatch/ChartWatch/SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,8 +91,8 @@
 		5450E0441C37ABB100E5A67B /* Tango */ = {
 			isa = PBXGroup;
 			children = (
+				542800451D9825F20003E854 /* SwiftyJSON.swift */,
 				5450E0451C37ABB100E5A67B /* AppDelegate.swift */,
-				54BE55DE1CD658DA002E53F3 /* SwiftyJSON.swift */,
 				5450E0491C37ABB100E5A67B /* Main.storyboard */,
 				5450E0671C37C5CB00E5A67B /* LevelTableViewController.swift */,
 				5450E0651C37ADC100E5A67B /* WordViewController.swift */,
@@ -103,7 +101,6 @@
 				5450E06D1C382DFD00E5A67B /* WordLibrary.swift */,
 				5450E0731C38419500E5A67B /* dummyData.json */,
 				54BE55DC1CB8C6C3002E53F3 /* StatsTableViewController.swift */,
-				5450E06B1C382DE900E5A67B /* data.json */,
 				5450E04C1C37ABB100E5A67B /* Assets.xcassets */,
 				5450E04E1C37ABB100E5A67B /* LaunchScreen.storyboard */,
 				5450E0511C37ABB100E5A67B /* Info.plist */,
@@ -171,10 +168,13 @@
 					5450E0411C37ABB100E5A67B = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 6HUL83HTGD;
+						LastSwiftMigration = 0800;
+						ProvisioningStyle = Automatic;
 					};
 					5450E0551C37ABB100E5A67B = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 6HUL83HTGD;
+						LastSwiftMigration = 0800;
 						TestTargetID = 5450E0411C37ABB100E5A67B;
 					};
 				};
@@ -206,7 +206,6 @@
 				5450E0501C37ABB100E5A67B /* LaunchScreen.storyboard in Resources */,
 				5450E04D1C37ABB100E5A67B /* Assets.xcassets in Resources */,
 				5450E04B1C37ABB100E5A67B /* Main.storyboard in Resources */,
-				5450E06C1C382DE900E5A67B /* data.json in Resources */,
 				5450E0741C38419500E5A67B /* dummyData.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -228,7 +227,7 @@
 				5450E0701C382E6100E5A67B /* Level.swift in Sources */,
 				5450E0681C37C5CB00E5A67B /* LevelTableViewController.swift in Sources */,
 				54BE55DD1CB8C6C3002E53F3 /* StatsTableViewController.swift in Sources */,
-				54BE55DF1CD658DA002E53F3 /* SwiftyJSON.swift in Sources */,
+				542800461D9825F20003E854 /* SwiftyJSON.swift in Sources */,
 				5450E0661C37ADC100E5A67B /* WordViewController.swift in Sources */,
 				5450E06E1C382DFD00E5A67B /* WordLibrary.swift in Sources */,
 				5450E06A1C37C97A00E5A67B /* Word.swift in Sources */,
@@ -310,7 +309,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -349,7 +348,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -362,11 +361,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: mica3721@gmail.com (LWB9F3PR9H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Tango/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.Tango;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -375,11 +376,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: mica3721@gmail.com (LWB9F3PR9H)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Tango/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.Tango;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -391,6 +394,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.TangoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tango.app/Tango";
 			};
 			name = Debug;
@@ -403,6 +407,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.TangoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tango.app/Tango";
 			};
 			name = Release;

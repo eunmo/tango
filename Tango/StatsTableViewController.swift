@@ -36,13 +36,13 @@ class StatsTableViewController: UITableViewController {
             }
         }
         
-        learnedCount = [Int](count: max - min + 1, repeatedValue: 0)
+        learnedCount = [Int](repeating: 0, count: max - min + 1)
         
         for word in allWords {
             learnedCount[word.streak - min] += 1
         }
         
-        reviewCount = [Int](count: max - min + 1, repeatedValue: 0)
+        reviewCount = [Int](repeating: 0, count: max - min + 1)
         
         for word in wordsToReview {
             reviewCount[word.streak - min] += 1
@@ -58,20 +58,20 @@ class StatsTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return max - min + 1
     }
 
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "StatsTableViewCell"
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
         
         // Configure the cell...
         let index = indexPath.row
@@ -80,7 +80,7 @@ class StatsTableViewController: UITableViewController {
         
         if streak > 0 {
             cell.detailTextLabel?.text = "\(reviewCount[index])/\(learnedCount[index])"
-            cell.backgroundColor = UIColor.clearColor()
+            cell.backgroundColor = UIColor.clear
         } else {
             cell.detailTextLabel?.text = "\(learnedCount[index])"
             cell.backgroundColor = UIColor.init(red: 0.5, green: 0.0, blue: 0.0, alpha: 1.0)

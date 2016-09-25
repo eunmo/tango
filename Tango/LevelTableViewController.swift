@@ -23,22 +23,22 @@ class LevelTableViewController: UITableViewController {
         
         wordLibrary = WordLibrary()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LevelTableViewController.receiveNotification), name: WordLibrary.notificationKey, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LevelTableViewController.receiveNetNotification), name: WordLibrary.networkNotificationKey, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LevelTableViewController.receiveNotification), name: NSNotification.Name(rawValue: WordLibrary.notificationKey), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(LevelTableViewController.receiveNetNotification), name: NSNotification.Name(rawValue: WordLibrary.networkNotificationKey), object: nil)
     }
     
     func receiveNotification() {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        DispatchQueue.main.async(execute: { () -> Void in
             self.tableView.reloadData()
         })
     }
     
     func receiveNetNotification() {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            let alertController = UIAlertController(title: "Sync done", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.Default,handler: nil))
+        DispatchQueue.main.async(execute: { () -> Void in
+            let alertController = UIAlertController(title: "Sync done", message: "", preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
             
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
             self.tableView.reloadData()
         })
         
@@ -51,31 +51,31 @@ class LevelTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return wordLibrary!.getLearnedCount() > 0 ? 2 : 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return section == 0 ? wordLibrary!.getLevelCount() : 1
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellIdentifier = "LevelTableViewCell"
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath)
 
         // Configure the cell...
-        cell.textLabel?.text = getCellText(indexPath)
-        cell.detailTextLabel?.text = getCellDetail(indexPath)
-        cell.userInteractionEnabled = getCellEnabled(indexPath)
+        cell.textLabel?.text = getCellText(indexPath: indexPath as NSIndexPath)
+        cell.detailTextLabel?.text = getCellDetail(indexPath: indexPath as NSIndexPath)
+        cell.isUserInteractionEnabled = getCellEnabled(indexPath: indexPath as NSIndexPath)
 
         return cell
     }
     
     func getCellText(indexPath: NSIndexPath) -> String {
         if indexPath.section == 0 {
-            return wordLibrary!.getLevelName(indexPath)
+            return wordLibrary!.getLevelName(indexPath: indexPath)
         } else {
             return "復習"
         }
@@ -83,7 +83,7 @@ class LevelTableViewController: UITableViewController {
     
     func getCellDetail(indexPath: NSIndexPath) -> String {
         if indexPath.section == 0 {
-            return wordLibrary!.getLevelDetail(indexPath)
+            return wordLibrary!.getLevelDetail(indexPath: indexPath)
         } else {
             return wordLibrary!.getReviewDetail()
         }
@@ -91,39 +91,39 @@ class LevelTableViewController: UITableViewController {
     
     func getCellEnabled(indexPath: NSIndexPath) -> Bool {
         if indexPath.section == 0 {
-            return wordLibrary!.getLevelRemainCount(indexPath) > 0
+            return wordLibrary!.getLevelRemainCount(indexPath: indexPath) > 0
         } else {
             return wordLibrary!.getReviewRemainCount() > 0
         }
     }
     
-    @IBAction func refresh(sender: UIBarButtonItem) {
+    @IBAction func refresh(_ sender: UIBarButtonItem) {
         tableView.reloadData()
     }
 
-    @IBAction func sync(sender: UIBarButtonItem) {
+    @IBAction func sync(_ sender: UIBarButtonItem) {
         wordLibrary!.sync()
     }
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
         if let identifier = segue.identifier {
             switch identifier {
             case "Show Words":
-                if let vc = segue.destinationViewController as? WordViewController {
+                if let vc = segue.destination as? WordViewController {
                     let path = tableView.indexPathForSelectedRow!
-                    vc.text = getCellText(path)
-                    vc.words = wordLibrary!.getWords(path)
+                    vc.text = getCellText(indexPath: path as NSIndexPath)
+                    vc.words = wordLibrary!.getWords(indexPath: path as NSIndexPath)
                     vc.wordLibrary = wordLibrary
                     vc.review = path.section == 1
                 }
             case "Show Statistics":
                 print("show statistics!!")
-                if let vc = segue.destinationViewController as? StatsTableViewController {
+                if let vc = segue.destination as? StatsTableViewController {
                     print("show statistics")
                     vc.allWords = wordLibrary!.getAllLearnedWords()
                     vc.wordsToReview = wordLibrary!.getWordsForReview()

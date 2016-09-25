@@ -27,7 +27,7 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var prevWrongCount = 0
     var text = ""
     var wordLibrary: WordLibrary?
-    var startTime: NSDate?
+    var startTime: Date?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,16 +37,16 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
         // Do any additional setup after loading the view.
         if words.count > 0 {
-            words.shuffleInPlace()
-            startTime = NSDate()
+            words.shuffle()
+            startTime = Date()
             if review {
                 for word in words {
                     if word.lastCorrect != nil {
-                        print("\(word.word)\t\(word.streak)\t\(word.lastCorrect!)\t\(word.lastCorrect!.timeIntervalSinceDate(startTime!))")
+                        print("\(word.word)\t\(word.streak)\t\(word.lastCorrect!)\t\(word.lastCorrect!.timeIntervalSince(startTime!))")
                     }
                 }
             }
-            setWord(words[0])
+            setWord(word: words[0])
         }
     }
 
@@ -67,8 +67,8 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func setWord(word: Word) {
         showDetails = false;
         
-        yomiganaLabel.hidden = true;
-        meaningLabel.hidden = true;
+        yomiganaLabel.isHidden = true;
+        meaningLabel.isHidden = true;
         
         wordLabel.text = word.word
         yomiganaLabel.text = word.yomigana
@@ -99,13 +99,13 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 incorrect.removeLast()
             }
             
-            setWord(word)
+            setWord(word: word)
         }
     }
     
     func next() {
         if let word = nextWord() {
-            setWord(word)
+            setWord(word: word)
         } else if review {
             for word in correct {
                 word.correct()
@@ -117,9 +117,9 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
             
             finish()
         } else if incorrect.count > 0 {
-            let alertController = UIAlertController(title: "\(incorrect.count) wrong", message: "", preferredStyle: UIAlertControllerStyle.Alert)
-            alertController.addAction(UIAlertAction(title: "Restart", style: UIAlertActionStyle.Default, handler: restart))
-            presentViewController(alertController, animated: true, completion: nil)
+            let alertController = UIAlertController(title: "\(incorrect.count) wrong", message: "", preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "Restart", style: UIAlertActionStyle.default, handler: restart))
+            present(alertController, animated: true, completion: nil)
         } else {
             finish()
         }
@@ -130,9 +130,9 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let title = String(format: "%d correct in %02d:%02d", arguments: [correct.count, duration / 60, duration % 60])
         let message = getStreakString()
         
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        alertController.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.Default, handler: dismiss))
-        presentViewController(alertController, animated: true, completion: nil)
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: dismiss))
+        present(alertController, animated: true, completion: nil)
     }
     
     func restart(action: UIAlertAction!) -> Void {
@@ -142,13 +142,13 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         correct = [Word]()
         incorrect = [Word]()
-        words.shuffleInPlace()
-        setWord(words[index])
+        words.shuffle()
+        setWord(word: words[index])
     }
     
     func dismiss(action: UIAlertAction!) -> Void {
-        wordLibrary!.record(words)
-        navigationController!.popViewControllerAnimated(true)
+        wordLibrary!.record(words: words)
+        navigationController!.popViewController(animated: true)
     }
     
     func getStreakString() -> String {
@@ -170,7 +170,7 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
         }
         
-        var streaks = [Int](count: maxStreak - minStreak + 1, repeatedValue: 0)
+        var streaks = [Int](repeating: 0, count: maxStreak - minStreak + 1)
         
         for word in words {
             streaks[maxStreak - word.streak] += 1
@@ -178,7 +178,7 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         var string = "Streaks"
         
-        for (index, streak) in streaks.enumerate() {
+        for (index, streak) in streaks.enumerated() {
             if streak != 0 {
                 string += String(format: "\n%02d:\t%02d", arguments: [maxStreak - index, streak])
             }
@@ -199,53 +199,53 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
     // MARK: Actions
     
-    @IBAction func viewTapped(sender: UITapGestureRecognizer) {
+    @IBAction func viewTapped(_ sender: UITapGestureRecognizer) {
         if !showDetails {
             showDetails = true;
             
-            yomiganaLabel.hidden = false;
-            meaningLabel.hidden = false;
+            yomiganaLabel.isHidden = false;
+            meaningLabel.isHidden = false;
         } else {
             showDetails = false;
             
-            yomiganaLabel.hidden = true;
-            meaningLabel.hidden = true;
+            yomiganaLabel.isHidden = true;
+            meaningLabel.isHidden = true;
         }
     }
     
-    @IBAction func negativeButtonPressed(sender: UIButton) {
+    @IBAction func negativeButtonPressed(_ sender: UIButton) {
         incorrect.append(getWord())
         next()
     }
     
-    @IBAction func positivieButtonPressed(sender: UIButton) {
+    @IBAction func positivieButtonPressed(_ sender: UIButton) {
         correct.append(getWord())
         next()
     }
     
-    @IBAction func prevButtonPressed(sender: UIBarButtonItem) {
+    @IBAction func prevButtonPressed(_ sender: UIBarButtonItem) {
         prev()
     }
     
     // MARK: UICollectionViewDataSource
     
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         return pass + 1
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return words.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("ProgressCollectionViewCell", forIndexPath: indexPath)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProgressCollectionViewCell", for: indexPath as IndexPath)
         
         // Configure the cell
         var shrink = false
         
         if indexPath.section < pass {
             if indexPath.row < prevWrongCount {
-                cell.backgroundColor = UIColor.orangeColor()
+                cell.backgroundColor = UIColor.orange
             } else {
                 cell.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 1.0, alpha: 1.0)
             }
@@ -255,15 +255,15 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
             let word = words[indexPath.row]
             
             if indexPath.row == index {
-                cell.backgroundColor = UIColor.darkGrayColor()
+                cell.backgroundColor = UIColor.darkGray
             } else if incorrect.contains(word) {
-                cell.backgroundColor = UIColor.orangeColor()
+                cell.backgroundColor = UIColor.orange
             } else if correct.contains(word) {
                 cell.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 1.0, alpha: 1.0)
                 
                 shrink = true
             } else {
-                cell.backgroundColor = UIColor.lightGrayColor()
+                cell.backgroundColor = UIColor.lightGray
                 
                 shrink = true
             }
@@ -281,16 +281,17 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
 }
 
-extension MutableCollectionType where Index == Int {
-    /// Shuffle the elements of `self` in-place.
-    mutating func shuffleInPlace() {
-        // empty and single-element collections don't shuffle
-        if count < 2 { return }
+extension MutableCollection where Indices.Iterator.Element == Index {
+    /// Shuffles the contents of this collection.
+    mutating func shuffle() {
+        let c = count
+        guard c > 1 else { return }
         
-        for i in 0..<count - 1 {
-            let j = Int(arc4random_uniform(UInt32(count - i))) + i
-            guard i != j else { continue }
-            swap(&self[i], &self[j])
+        for (unshuffledCount, firstUnshuffled) in zip(stride(from: c, to: 1, by: -1), indices) {
+            let d: IndexDistance = numericCast(arc4random_uniform(numericCast(unshuffledCount)))
+            guard d != 0 else { continue }
+            let i = index(firstUnshuffled, offsetBy: d)
+            swap(&self[firstUnshuffled], &self[i])
         }
     }
 }

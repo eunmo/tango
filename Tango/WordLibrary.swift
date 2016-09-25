@@ -14,12 +14,12 @@ class WordLibrary {
     var levels = [Level]()
     var testLimit = 30
     let refHour = 5
-    let dateFormatter: NSDateFormatter = NSDateFormatter()
+    let dateFormatter: DateFormatter = DateFormatter()
     
     // MARK: Archiving Paths
     
-    static let DocumentsDirectory = NSFileManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first!
-    static let ArchiveURL = DocumentsDirectory.URLByAppendingPathComponent("words")
+    static let DocumentsDirectory = FileManager().urls(for: .documentDirectory, in: .userDomainMask).first!
+    static let ArchiveURL = DocumentsDirectory.appendingPathComponent("words")
     
     // MARK: Notification Key
     
@@ -34,7 +34,7 @@ class WordLibrary {
     }
     
     func save() {
-        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(levels, toFile: WordLibrary.ArchiveURL.path!)
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(levels, toFile: WordLibrary.ArchiveURL.path)
         print ("save")
         if !isSuccessfulSave {
             print("Failed to save songs...")
@@ -42,7 +42,7 @@ class WordLibrary {
     }
     
     func load() {
-        let savedLevels = NSKeyedUnarchiver.unarchiveObjectWithFile(WordLibrary.ArchiveURL.path!) as? [Level]
+        let savedLevels = NSKeyedUnarchiver.unarchiveObject(withFile: WordLibrary.ArchiveURL.path) as? [Level]
         
         if savedLevels != nil {
             levels = savedLevels!
@@ -74,15 +74,15 @@ class WordLibrary {
     }
     
     func getLevelName(indexPath: NSIndexPath) -> String {
-        return getLevelFromIndexPath(indexPath)?.name ?? ""
+        return getLevelFromIndexPath(indexPath: indexPath)?.name ?? ""
     }
     
     func getLevelSize(indexPath: NSIndexPath) -> Int {
-        return getLevelFromIndexPath(indexPath)?.words.count ?? 0
+        return getLevelFromIndexPath(indexPath: indexPath)?.words.count ?? 0
     }
     
     func getLevelRemainCount(indexPath: NSIndexPath) -> Int {
-        if let level = getLevelFromIndexPath(indexPath) {
+        if let level = getLevelFromIndexPath(indexPath: indexPath) {
             return level.words.count - level.getLearnedCount()
         } else {
             return 0
@@ -90,7 +90,7 @@ class WordLibrary {
     }
     
     func getLevelDetail(indexPath: NSIndexPath) -> String {
-        if let level = getLevelFromIndexPath(indexPath) {
+        if let level = getLevelFromIndexPath(indexPath: indexPath) {
             let count = level.words.count
             let learnedCount = level.getLearnedCount()
             
@@ -157,27 +157,27 @@ class WordLibrary {
     func getWordsForReview() -> [Word] {
         var words = [Word]()
         var wordsForReview = [Word]()
-        let curDate = NSDate()
-        let calendar = NSCalendar.currentCalendar()
-        let dateComponents = calendar.components([NSCalendarUnit.Day, NSCalendarUnit.Month, NSCalendarUnit.Year, NSCalendarUnit.Hour], fromDate: curDate)
+        let curDate = Date()
+        let calendar = Calendar.current
+        var dateComponents = calendar.dateComponents(Set<Calendar.Component>([.day, .month, .year, .hour]), from: curDate)
         
-        if (dateComponents.hour < refHour) {
+        if (dateComponents.hour! < refHour) {
             dateComponents.hour = refHour
         }
         else {
             dateComponents.hour = refHour
-            dateComponents.day += 1
+            dateComponents.day = dateComponents.day! + 1
         }
-        let refDate = calendar.dateFromComponents(dateComponents)!
+        let refDate = calendar.date(from: dateComponents)!
         
         for level in levels {
-            words.appendContentsOf(level.getWordsToReview())
+            words.append(contentsOf: level.getWordsToReview())
         }
         
         for word in words {
             var add = true
             
-            if let interval = word.lastCorrect?.timeIntervalSinceDate(refDate) {
+            if let interval = word.lastCorrect?.timeIntervalSince(refDate) {
                 let timeLimit = Double(word.streak) * -86400
                 if (timeLimit < interval || word.streak > 10) {
                     add = false
@@ -196,7 +196,7 @@ class WordLibrary {
         var words = [Word]()
         
         for level in levels {
-            words.appendContentsOf(level.getWordsToReview())
+            words.append(contentsOf: level.getWordsToReview())
         }
         
         return words
@@ -207,19 +207,19 @@ class WordLibrary {
         let section = indexPath.section
         
         if section == 0 {
-            if let level = getLevelFromIndexPath(indexPath) {
+            if let level = getLevelFromIndexPath(indexPath: indexPath) {
                 words = level.getWordsToLearn()
             }
         } else {
             words = getWordsForReview()
         }
         
-        words.shuffleInPlace()
+        words.shuffle()
         
         let count = words.count
         
         if count > testLimit {
-            words.removeRange(testLimit..<count)
+            words.removeSubrange(testLimit..<count)
         }
         
         return words
@@ -235,7 +235,7 @@ class WordLibrary {
     }
     
     func notify() {
-        NSNotificationCenter.defaultCenter().postNotificationName(WordLibrary.notificationKey, object: self)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: WordLibrary.notificationKey), object: self)
     }
     
     func toJSON() -> String {
@@ -255,7 +255,7 @@ class WordLibrary {
                 json += "\"Level\":\"\(level.name)\",\"index\":\(word.index),\"streak\":\(word.streak),\"learned\":\(word.learned)"
                 
                 if let lastCorrect = word.lastCorrect {
-                    json += ",\"lastCorrect\":\"\(dateFormatter.stringFromDate(lastCorrect))\""
+                    json += ",\"lastCorrect\":\"\(dateFormatter.string(from: lastCorrect))\""
                 }
             }
         }
@@ -268,7 +268,7 @@ class WordLibrary {
     func getWord(levelName: String, index: Int) -> Word? {
         for level in levels {
             if (level.name == levelName) {
-                return level.getWord(index)
+                return level.getWord(index: index)
             }
         }
         
@@ -277,15 +277,15 @@ class WordLibrary {
     
     func sync() {
         let urlAsString = WordLibrary.serverAddress + "/sync"
-        let url = NSURL(string: urlAsString)!
-        let urlSession = NSURLSession.sharedSession()
+        let url = URL(string: urlAsString)!
+        let urlSession = URLSession.shared
         
-        let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "PUT"
-        request.HTTPBody = toJSON().dataUsingEncoding(NSUTF8StringEncoding)
+        var request = URLRequest(url: url as URL)
+        request.httpMethod = "PUT"
+        request.httpBody = toJSON().data(using: String.Encoding.utf8)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let task = urlSession.dataTaskWithRequest(request, completionHandler: { data, response, error -> Void in
+        let task = urlSession.dataTask(with: request, completionHandler: { data, response, error -> Void in
             if error != nil {
                 print ("\(error)")
             } else {
@@ -311,7 +311,7 @@ class WordLibrary {
                 
                 for (level, array) in words {
                     print ("\(level) \(array.count) words")
-                    self.getLevelByName(level)?.update(array)
+                    self.getLevelByName(name: level)?.update(words: array)
                 }
                 
                 self.save()
@@ -322,6 +322,6 @@ class WordLibrary {
     }
     
     func notifyNetworkDone() {
-        NSNotificationCenter.defaultCenter().postNotificationName(WordLibrary.networkNotificationKey, object: self)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: WordLibrary.networkNotificationKey), object: self)
     }
 }
