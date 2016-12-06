@@ -56,6 +56,12 @@ class WordLibrary {
             }
         }
         
+        if let level = Level(name: name) {
+            levels.append(level)
+            levels.sort (by: { $0.name < $1.name })
+            return level
+        }
+        
         return nil
     }
     
@@ -240,27 +246,21 @@ class WordLibrary {
     
     func toJSON() -> String {
         var json = "["
-        var first = true
         
         for level in levels {
             for word in level.words {
                 
-                if (first) {
-                    json += "\n{"
-                    first = false
-                } else {
-                    json += "},\n{"
-                }
-                
-                json += "\"Level\":\"\(level.name)\",\"index\":\(word.index),\"streak\":\(word.streak),\"learned\":\(word.learned)"
+                json += "{\"Level\":\"\(level.name)\",\"index\":\(word.index),\"streak\":\(word.streak),\"learned\":\(word.learned)"
                 
                 if let lastCorrect = word.lastCorrect {
                     json += ",\"lastCorrect\":\"\(dateFormatter.string(from: lastCorrect))\""
                 }
+                
+                json += "}\n,"
             }
         }
         
-        json += "}]"
+        json += "{}]"
         
         return json
     }
@@ -306,6 +306,13 @@ class WordLibrary {
                     }
                     
                     let newWord = Word(index: index, word: word, yomigana: yomigana, meaning: meaning)!
+                    
+                    if (json["learned"].boolValue) {
+                        newWord.learned = true
+                        newWord.streak = json["streak"].intValue
+                        newWord.lastCorrect = self.dateFormatter.date(from: json["lastCorrect"].stringValue)
+                    }
+                    
                     words[level]!.append(newWord)
                 }
                 

@@ -167,13 +167,13 @@
 				TargetAttributes = {
 					5450E0411C37ABB100E5A67B = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 6HUL83HTGD;
+						DevelopmentTeam = MN8Y3BHMSS;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 					5450E0551C37ABB100E5A67B = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 6HUL83HTGD;
+						DevelopmentTeam = MN8Y3BHMSS;
 						LastSwiftMigration = 0800;
 						TestTargetID = 5450E0411C37ABB100E5A67B;
 					};
@@ -362,9 +362,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: mica3721@gmail.com (LWB9F3PR9H)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = MN8Y3BHMSS;
 				INFOPLIST_FILE = Tango/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.Tango;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eunmoyang.Tango;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
@@ -377,9 +378,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer: mica3721@gmail.com (LWB9F3PR9H)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = MN8Y3BHMSS;
 				INFOPLIST_FILE = Tango/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.example.Tango;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eunmoyang.Tango;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_VERSION = 3.0;
@@ -390,6 +392,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = MN8Y3BHMSS;
 				INFOPLIST_FILE = TangoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.TangoTests;
@@ -403,6 +406,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = MN8Y3BHMSS;
 				INFOPLIST_FILE = TangoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.TangoTests;
