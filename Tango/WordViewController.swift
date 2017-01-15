@@ -89,6 +89,7 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func prev() {
+        print ("prev \(index)")
         if index > 0 {
             index -= 1
             let word = words[index]
@@ -107,32 +108,49 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
         if let word = nextWord() {
             setWord(word: word)
         } else if review {
-            for word in correct {
-                word.correct()
-            }
+            let title = getTitleString()
+            let message = getStreakString()
             
-            for word in incorrect {
-                word.incorrect()
-            }
-            
-            finish()
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "Prev", style: UIAlertActionStyle.default, handler: prevHandler))
+            alertController.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: finishReview))
+            alertController.preferredAction = alertController.actions[1] // Done
+            present(alertController, animated: true, completion: nil)
         } else if incorrect.count > 0 {
             let alertController = UIAlertController(title: "\(incorrect.count) wrong", message: "", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Restart", style: UIAlertActionStyle.default, handler: restart))
             present(alertController, animated: true, completion: nil)
         } else {
-            finish()
+            let title = getTitleString()
+            
+            let alertController = UIAlertController(title: title, message: "", preferredStyle: UIAlertControllerStyle.alert)
+            alertController.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: dismiss))
+            present(alertController, animated: true, completion: nil)
         }
     }
     
-    func finish() {
-        let duration = Int(-startTime!.timeIntervalSinceNow)
-        let title = String(format: "%d correct in %02d:%02d", arguments: [correct.count, duration / 60, duration % 60])
-        let message = getStreakString()
+    func prevHandler(action: UIAlertAction!) -> Void {
+        let word = words[index]
         
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: dismiss))
-        present(alertController, animated: true, completion: nil)
+        if correct.contains(word) {
+            correct.removeLast()
+        } else if incorrect.contains(word) {
+            incorrect.removeLast()
+        }
+        
+        setWord(word: word)
+    }
+    
+    func finishReview(action: UIAlertAction!) -> Void {
+        for word in correct {
+            word.correct()
+        }
+        
+        for word in incorrect {
+            word.incorrect()
+        }
+        
+        dismiss(action: action)
     }
     
     func restart(action: UIAlertAction!) -> Void {
@@ -151,11 +169,12 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
         navigationController!.popViewController(animated: true)
     }
     
+    func getTitleString() -> String {
+        let duration = Int(-startTime!.timeIntervalSinceNow)
+        return String(format: "%d correct in %02d:%02d", arguments: [correct.count, duration / 60, duration % 60])
+    }
+    
     func getStreakString() -> String {
-        
-        if !review {
-            return ""
-        }
         
         var maxStreak = 0
         var minStreak = 0
@@ -170,17 +189,21 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
             }
         }
         
-        var streaks = [Int](repeating: 0, count: maxStreak - minStreak + 1)
+        var streaks = [(correct: Int, total: Int)](repeating: (correct: 0, total: 0), count: maxStreak - minStreak + 1)
         
         for word in words {
-            streaks[maxStreak - word.streak] += 1
+            if (correct.contains(word)) {
+                streaks[maxStreak - word.streak].correct += 1
+            }
+            
+            streaks[maxStreak - word.streak].total += 1
         }
         
         var string = "Streaks"
         
         for (index, streak) in streaks.enumerated() {
-            if streak != 0 {
-                string += String(format: "\n%02d:\t%02d", arguments: [maxStreak - index, streak])
+            if streak.total != 0 {
+                string += String(format: "\n%02d:\t+%02d\t-%02d", arguments: [maxStreak - index, streak.correct, streak.total - streak.correct])
             }
         }
         
