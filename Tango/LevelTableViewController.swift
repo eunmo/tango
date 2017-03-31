@@ -11,6 +11,7 @@ import UIKit
 class LevelTableViewController: UITableViewController {
     
     var wordLibrary: WordLibrary?
+    @IBOutlet weak var syncButton: UIBarButtonItem!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +38,8 @@ class LevelTableViewController: UITableViewController {
         DispatchQueue.main.async(execute: { () -> Void in
             let alertController = UIAlertController(title: "Sync done", message: "", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
+            
+            self.syncButton.isEnabled = true
             
             self.present(alertController, animated: true, completion: nil)
             self.tableView.reloadData()
@@ -102,6 +105,7 @@ class LevelTableViewController: UITableViewController {
     }
 
     @IBAction func sync(_ sender: UIBarButtonItem) {
+        syncButton.isEnabled = false
         wordLibrary!.sync()
     }
     
