@@ -83,6 +83,23 @@ class WordLibrary {
         return getLevelFromIndexPath(indexPath: indexPath)?.name ?? ""
     }
     
+    func getReviewName(indexPath: NSIndexPath) -> String {
+        var name: String
+        
+        switch (indexPath.row) {
+        case 0:
+            name = "Review"
+        case 1:
+            name = "Revoir"
+        case 2:
+            name = "復習"
+        default:
+            name = ""
+        }
+        
+        return name
+    }
+    
     func getLevelSize(indexPath: NSIndexPath) -> Int {
         return getLevelFromIndexPath(indexPath: indexPath)?.words.count ?? 0
     }
@@ -106,12 +123,28 @@ class WordLibrary {
         }
     }
     
-    func getReviewRemainCount() -> Int {
-        return getWordsForReview().count
+    func getLevelsToReview(indexPath: NSIndexPath) -> [Level] {
+        var levelsToReview = [Level]()
+        
+        for level in levels {
+            let lang = level.name[level.name.startIndex];
+            
+            if (indexPath.row == 0 && lang == "E") ||
+               (indexPath.row == 1 && lang == "F") ||
+               (indexPath.row == 2 && (lang == "J" || lang == "N")) {
+               levelsToReview.append(level)
+            }
+        }
+        
+        return levelsToReview
     }
     
-    func getReviewNegativeSum() -> Int {
-        let words = getWordsForReview()
+    func getReviewRemainCount(indexPath: NSIndexPath) -> Int {
+        return getWordsForReview(indexPath: indexPath).count
+    }
+    
+    func getReviewNegativeSum(indexPath: NSIndexPath) -> Int {
+        let words = getWordsForReview(indexPath: indexPath)
         var sum = 0
         
         for word in words {
@@ -123,11 +156,11 @@ class WordLibrary {
         return sum
     }
     
-    func getReviewDetail() -> String {
-        let learnedCount = getLearnedCount()
-        let doneCount = getDoneCount()
-        let remainCount = getReviewRemainCount()
-        let negativeSum = getReviewNegativeSum()
+    func getReviewDetail(indexPath: NSIndexPath) -> String {
+        let learnedCount = getLearnedCount(indexPath: indexPath)
+        let doneCount = getDoneCount(indexPath: indexPath)
+        let remainCount = getReviewRemainCount(indexPath: indexPath)
+        let negativeSum = getReviewNegativeSum(indexPath: indexPath)
         
         if negativeSum > 0 {
             return "\(remainCount - negativeSum)+\(negativeSum)/\(learnedCount - doneCount)+\(doneCount) words"
@@ -136,20 +169,22 @@ class WordLibrary {
         }
     }
     
-    func getLearnedCount() -> Int {
+    func getLearnedCount(indexPath: NSIndexPath) -> Int {
+        let levelsToReview = getLevelsToReview(indexPath: indexPath)
         var count = 0
         
-        for level in levels {
+        for level in levelsToReview {
             count += level.getLearnedCount()
         }
         
         return count
     }
     
-    func getDoneCount() -> Int {
+    func getDoneCount(indexPath: NSIndexPath) -> Int {
+        let levelsToReview = getLevelsToReview(indexPath: indexPath)
         var count = 0
         
-        for level in levels {
+        for level in levelsToReview {
             for word in level.words {
                 if (word.streak > 10) {
                     count += 1
@@ -160,7 +195,8 @@ class WordLibrary {
         return count
     }
     
-    func getWordsForReview() -> [Word] {
+    func getWordsForReview(indexPath: NSIndexPath? = nil) -> [Word] {
+        let levelsToReview = (indexPath != nil) ? getLevelsToReview(indexPath: indexPath!) : levels
         var words = [Word]()
         var wordsForReview = [Word]()
         let curDate = Date()
@@ -176,7 +212,7 @@ class WordLibrary {
         }
         let refDate = calendar.date(from: dateComponents)!
         
-        for level in levels {
+        for level in levelsToReview {
             words.append(contentsOf: level.getWordsToReview())
         }
         
@@ -217,7 +253,7 @@ class WordLibrary {
                 words = level.getWordsToLearn()
             }
         } else {
-            words = getWordsForReview()
+            words = getWordsForReview(indexPath: indexPath)
         }
         
         words.shuffle()
@@ -287,7 +323,7 @@ class WordLibrary {
         
         let task = urlSession.dataTask(with: request, completionHandler: { data, response, error -> Void in
             if error != nil {
-                print ("\(error)")
+                print ("\(String(describing: error))")
             } else {
                 print ("put successful")
                 

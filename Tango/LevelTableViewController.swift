@@ -56,12 +56,12 @@ class LevelTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return wordLibrary!.getLearnedCount() > 0 ? 2 : 1
+        return wordLibrary!.getAllLearnedWords().count > 0 ? 2 : 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return section == 0 ? wordLibrary!.getLevelCount() : 1
+        return section == 0 ? wordLibrary!.getLevelCount() : 3
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -80,7 +80,7 @@ class LevelTableViewController: UITableViewController {
         if indexPath.section == 0 {
             return wordLibrary!.getLevelName(indexPath: indexPath)
         } else {
-            return "復習"
+            return wordLibrary!.getReviewName(indexPath: indexPath)
         }
     }
     
@@ -88,7 +88,7 @@ class LevelTableViewController: UITableViewController {
         if indexPath.section == 0 {
             return wordLibrary!.getLevelDetail(indexPath: indexPath)
         } else {
-            return wordLibrary!.getReviewDetail()
+            return wordLibrary!.getReviewDetail(indexPath: indexPath)
         }
     }
     
@@ -96,7 +96,7 @@ class LevelTableViewController: UITableViewController {
         if indexPath.section == 0 {
             return wordLibrary!.getLevelRemainCount(indexPath: indexPath) > 0
         } else {
-            return wordLibrary!.getReviewRemainCount() > 0
+            return wordLibrary!.getReviewRemainCount(indexPath: indexPath) > 0
         }
     }
     
