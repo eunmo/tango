@@ -25,7 +25,17 @@ class WordLibrary {
     
     static let notificationKey = "wordLibraryNotificationKey"
     static let networkNotificationKey = "wordLibraryNetworkNotificationKey"
+    
     static let serverAddress = "http://211.200.135.97:3010"
+    static let languageCount = 3
+    static let reviewNames = ["Review", "Revoir", "復習"]
+    static let levelToLanguage: [Character: Int] = ["E": 0, "F": 1, "J": 2, "N": 2]
+    /*
+    static let serverAddress = "http://211.200.135.97:3011"
+    static let languageCount = 1
+    static let reviewNames = ["Review"]
+    static let levelToLanguage: [Character: Int] = ["S": 0]
+    */
     
     init() {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
@@ -84,20 +94,7 @@ class WordLibrary {
     }
     
     func getReviewName(indexPath: NSIndexPath) -> String {
-        var name: String
-        
-        switch (indexPath.row) {
-        case 0:
-            name = "Review"
-        case 1:
-            name = "Revoir"
-        case 2:
-            name = "復習"
-        default:
-            name = ""
-        }
-        
-        return name
+        return WordLibrary.reviewNames[indexPath.row]
     }
     
     func getLevelSize(indexPath: NSIndexPath) -> Int {
@@ -129,9 +126,7 @@ class WordLibrary {
         for level in levels {
             let lang = level.name[level.name.startIndex];
             
-            if (indexPath.row == 0 && lang == "E") ||
-               (indexPath.row == 1 && lang == "F") ||
-               (indexPath.row == 2 && (lang == "J" || lang == "N")) {
+            if (indexPath.row == WordLibrary.levelToLanguage[lang]) {
                levelsToReview.append(level)
             }
         }

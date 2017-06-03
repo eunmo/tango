@@ -61,7 +61,7 @@ class LevelTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return section == 0 ? wordLibrary!.getLevelCount() : 3
+        return section == 0 ? wordLibrary!.getLevelCount() : WordLibrary.languageCount;
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
