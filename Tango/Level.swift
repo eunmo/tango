@@ -115,6 +115,18 @@ class Level: NSObject, NSCoding {
         return count
     }
     
+    func getNotLearnedCount() -> Int {
+        var count = 0
+        
+        for word in words {
+            if !word.learned {
+                count += 1;
+            }
+        }
+        
+        return count
+    }
+    
     func getWordsToReview() -> [Word] {
         var learnedWords = [Word]()
         

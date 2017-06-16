@@ -12,6 +12,7 @@ class WordLibrary {
     
     // MARK: Properties
     var levels = [Level]()
+    var levelsToLearn = [Level]()
     var testLimit = 30
     let refHour = 5
     let dateFormatter: DateFormatter = DateFormatter()
@@ -49,6 +50,13 @@ class WordLibrary {
         if !isSuccessfulSave {
             print("Failed to save songs...")
         }
+        
+        levelsToLearn.removeAll()
+        for level in levels {
+            if level.getWordsToLearn().count > 0 {
+                levelsToLearn.append(level)
+            }
+        }
     }
     
     func load() {
@@ -76,14 +84,14 @@ class WordLibrary {
     }
     
     func getLevelCount() -> Int {
-        return levels.count
+        return levelsToLearn.count
     }
     
     func getLevelFromIndexPath(indexPath: NSIndexPath) -> Level? {
         let row = indexPath.row
         
-        if row < levels.count {
-            return levels[row]
+        if row < levelsToLearn.count {
+            return levelsToLearn[row]
         } else {
             return nil
         }
@@ -103,7 +111,7 @@ class WordLibrary {
     
     func getLevelRemainCount(indexPath: NSIndexPath) -> Int {
         if let level = getLevelFromIndexPath(indexPath: indexPath) {
-            return level.words.count - level.getLearnedCount()
+            return level.getNotLearnedCount()
         } else {
             return 0
         }
@@ -111,10 +119,9 @@ class WordLibrary {
     
     func getLevelDetail(indexPath: NSIndexPath) -> String {
         if let level = getLevelFromIndexPath(indexPath: indexPath) {
-            let count = level.words.count
-            let learnedCount = level.getLearnedCount()
+            let notLearnedCount = level.getNotLearnedCount()
             
-            return "\(learnedCount)/\(count) words"
+            return "\(notLearnedCount) new words"
         } else {
             return ""
         }
