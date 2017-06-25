@@ -64,6 +64,16 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
         return words[index]
     }
     
+    func formatMeaningString(meaning: String) -> String {
+        var string = meaning
+        
+        for i in 2...5 {
+            string = string.replacingOccurrences(of: " \(i))", with: "\n\(i))")
+        }
+        
+        return string;
+    }
+    
     func setWord(word: Word) {
         showDetails = false;
         
@@ -72,7 +82,7 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         wordLabel.text = word.word
         yomiganaLabel.text = word.yomigana
-        meaningLabel.text = word.meaning
+        meaningLabel.text = formatMeaningString(meaning: word.meaning)
         
         updateUI()
     }
@@ -89,7 +99,6 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func prev() {
-        print ("prev \(index)")
         if index > 0 {
             index -= 1
             let word = words[index]
