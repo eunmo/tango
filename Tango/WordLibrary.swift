@@ -355,9 +355,10 @@ class WordLibrary {
                 }
                 
                 for (level, array) in words {
-                    print ("\(level) \(array.count) words")
                     self.getLevelByName(name: level)?.update(words: array)
                 }
+                
+                self.levels = self.levels.filter { words[$0.name] != nil }
                 
                 self.save()
                 self.notifyNetworkDone()
