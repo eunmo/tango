@@ -28,13 +28,13 @@ class LevelTableViewController: UITableViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(LevelTableViewController.receiveNetNotification), name: NSNotification.Name(rawValue: WordLibrary.networkNotificationKey), object: nil)
     }
     
-    func receiveNotification() {
+    @objc func receiveNotification() {
         DispatchQueue.main.async(execute: { () -> Void in
             self.tableView.reloadData()
         })
     }
     
-    func receiveNetNotification() {
+    @objc func receiveNetNotification() {
         DispatchQueue.main.async(execute: { () -> Void in
             let alertController = UIAlertController(title: "Sync done", message: "", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
