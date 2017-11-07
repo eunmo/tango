@@ -90,11 +90,7 @@ class Word: NSObject, NSCoding {
     }
     
     func incorrect() {
-        if (streak > 0) {
-            streak = -1
-        } else {
-            streak -= 1
-        }
+        streak = -2
         lastCorrect = nil
     }
 }
