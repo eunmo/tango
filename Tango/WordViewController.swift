@@ -81,7 +81,7 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
         meaningLabel.isHidden = true;
         
         wordLabel.text = word.word
-        yomiganaLabel.text = word.yomigana
+        yomiganaLabel.text = "  \(word.yomigana)  "
         meaningLabel.text = formatMeaningString(meaning: word.meaning)
         
         updateUI()
@@ -305,8 +305,8 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
             cell.layer.bounds = CGRect(x: 1.0, y: 1.0, width: 4.5, height: 4.5)
             cell.layer.cornerRadius = 2.25
         } else {
-            cell.layer.bounds = CGRect(x: 0, y: 0, width: 6.5, height: 6.5)
-            cell.layer.cornerRadius = 3.25
+            cell.layer.bounds = CGRect(x: 0, y: 0, width: 6, height: 6)
+            cell.layer.cornerRadius = 3
         }
         
         return cell
