@@ -81,7 +81,7 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
         meaningLabel.isHidden = true;
         
         wordLabel.text = word.word
-        yomiganaLabel.text = "  \(word.yomigana)  "
+        yomiganaLabel.text = "\(word.yomigana)  "
         meaningLabel.text = formatMeaningString(meaning: word.meaning)
         
         updateUI()
