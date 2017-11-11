@@ -41,9 +41,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RJw-w9-SWX">
-                                <rect key="frame" x="207" y="722" width="152" height="48"/>
+                                <rect key="frame" x="237" y="722" width="122" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                <state key="normal" title="知っている"/>
+                                <state key="normal" title="知ってる"/>
                                 <connections>
                                     <action selector="positivieButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="97X-5L-nOq"/>
                                 </connections>
@@ -76,6 +76,14 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vaO-wO-s46">
+                                <rect key="frame" x="166.66666666666666" y="728" width="41" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="前へ"/>
+                                <connections>
+                                    <action selector="lowerPrevButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ccz-2v-9U1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <gestureRecognizers/>
@@ -92,9 +100,11 @@
                             <constraint firstItem="aj4-9l-EV5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="O39-91-5LI"/>
                             <constraint firstItem="vvV-Sv-3qv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="QdE-BP-fsk"/>
                             <constraint firstItem="vvV-Sv-3qv" firstAttribute="top" secondItem="9Ro-eF-sYR" secondAttribute="bottom" constant="8" id="VEj-pk-MUn"/>
+                            <constraint firstItem="vaO-wO-s46" firstAttribute="centerY" secondItem="RJw-w9-SWX" secondAttribute="centerY" id="Vxc-0y-8O5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="9Ro-eF-sYR" secondAttribute="trailing" constant="8" id="X0M-ey-SF7"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="5e4-Er-cWK" secondAttribute="bottom" constant="8" id="Yao-RH-sWl"/>
                             <constraint firstAttribute="trailingMargin" secondItem="aj4-9l-EV5" secondAttribute="trailing" id="arp-oh-A3y"/>
+                            <constraint firstItem="vaO-wO-s46" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fMA-Cd-kyi"/>
                             <constraint firstItem="9Ro-eF-sYR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="gM1-Sk-dAv"/>
                             <constraint firstItem="aj4-9l-EV5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="jzg-30-eOE"/>
                             <constraint firstItem="aj4-9l-EV5" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="qm3-m1-Zpt"/>

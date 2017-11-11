@@ -259,6 +259,10 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
         prev()
     }
     
+    @IBAction func lowerPrevButtonPressed(_ sender: UIButton) {
+        prev()
+    }
+    
     // MARK: UICollectionViewDataSource
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
