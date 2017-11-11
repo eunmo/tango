@@ -14,6 +14,7 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var yomiganaLabel: UILabel!
     @IBOutlet weak var wordLabel: UILabel!
     @IBOutlet weak var meaningLabel: UILabel!
+    @IBOutlet weak var meaningView: UIView!
     
     @IBOutlet weak var progressCollectionView: UICollectionView!
     
@@ -231,7 +232,7 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
     // MARK: Actions
     
-    @IBAction func viewTapped(_ sender: UITapGestureRecognizer) {
+    @IBAction func meaningViewTapped(_ sender: UITapGestureRecognizer) {
         if !showDetails {
             showDetails = true;
             
