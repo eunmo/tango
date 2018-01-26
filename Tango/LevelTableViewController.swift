@@ -36,15 +36,10 @@ class LevelTableViewController: UITableViewController {
     
     @objc func receiveNetNotification() {
         DispatchQueue.main.async(execute: { () -> Void in
-            let alertController = UIAlertController(title: "Sync done", message: "", preferredStyle: UIAlertControllerStyle.alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default,handler: nil))
             
             self.syncButton.isEnabled = true
-            
-            self.present(alertController, animated: true, completion: nil)
             self.tableView.reloadData()
         })
-        
     }
 
     override func didReceiveMemoryWarning() {
