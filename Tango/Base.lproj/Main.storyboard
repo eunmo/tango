@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="x6b-GF-eyd">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="x6b-GF-eyd">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -79,7 +79,7 @@
                                 </cells>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="USw-QX-vyb">
-                                <rect key="frame" x="16" y="438" width="343" height="276"/>
+                                <rect key="frame" x="16" y="438" width="343" height="234"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vvV-Sv-3qv">
                                         <rect key="frame" x="30" y="0.0" width="283" height="21"/>
@@ -109,7 +109,7 @@
                             <constraint firstItem="9Ro-eF-sYR" firstAttribute="top" secondItem="RhD-No-EVc" secondAttribute="bottom" constant="8" id="5Sl-6H-pRs"/>
                             <constraint firstItem="USw-QX-vyb" firstAttribute="trailing" secondItem="RJw-w9-SWX" secondAttribute="trailing" id="7nS-mc-gaN"/>
                             <constraint firstItem="9Ro-eF-sYR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="8" id="7nT-NZ-Ip2"/>
-                            <constraint firstItem="5e4-Er-cWK" firstAttribute="top" secondItem="USw-QX-vyb" secondAttribute="bottom" constant="8" symbolic="YES" id="COW-hZ-oFR"/>
+                            <constraint firstItem="5e4-Er-cWK" firstAttribute="top" secondItem="USw-QX-vyb" secondAttribute="bottom" constant="50" id="COW-hZ-oFR"/>
                             <constraint firstItem="RhD-No-EVc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="GKv-sS-ja1"/>
                             <constraint firstItem="RhD-No-EVc" firstAttribute="top" secondItem="aj4-9l-EV5" secondAttribute="bottom" constant="8" id="Hd4-dU-PLg"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="RJw-w9-SWX" secondAttribute="bottom" constant="8" id="IYj-Ux-Ulf"/>
