@@ -50,10 +50,22 @@
                                     <action selector="negativeButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PWV-R3-rH9"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vaO-wO-s46">
-                                <rect key="frame" x="167" y="728" width="41" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="前へ"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vaO-wO-s46">
+                                <rect key="frame" x="159.66666666666666" y="722" width="56" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="56" id="Y6c-a3-of3"/>
+                                    <constraint firstAttribute="height" constant="48" id="bAP-Et-sMw"/>
+                                </constraints>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="前へ">
+                                            <attributes>
+                                                <font key="NSFont" size="20" name=".AppleSDGothicNeoI-Regular"/>
+                                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
                                 <connections>
                                     <action selector="lowerPrevButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ccz-2v-9U1"/>
                                 </connections>
