@@ -370,4 +370,68 @@ class WordLibrary {
     func notifyNetworkDone() {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: WordLibrary.networkNotificationKey), object: self)
     }
+    
+    func getTestMaterial() -> [[String: Any]] {
+        var words = [[String: Any]]()
+        
+        if levelsToLearn.count > 0 {
+            let level = levelsToLearn[0]
+            let wordsToLearn = level.getWordsToLearn()
+            let limit = min(10, wordsToLearn.count)
+            
+            for i in 0..<limit {
+                let word = wordsToLearn[i]
+                var testWord = [String: Any]()
+                testWord["level"] = level.name
+                testWord["index"] = word.index
+                testWord["word"] = word.word
+                testWord["yomigana"] = word.yomigana
+                testWord["meaning"] = word.meaning
+                words.append(testWord)
+            }
+        } else {
+            //
+        }
+        words.shuffle()
+        
+        return words
+    }
+    
+    func commitWatchTest(words:[[String: Any]]) {
+        var allCorrect = true
+        for word in words {
+            let result = word["result"] as! Bool
+            if result != true {
+                allCorrect = false
+                break
+            }
+        }
+        
+        for word in words {
+            let result = word["result"] as! Bool
+            let levelName = word["level"] as! String
+            let index = word["index"] as! Int
+            
+            for level in levels {
+                if (level.name == levelName) {
+                    if let word = level.getWord(index: index) {
+                        if word.learned {
+                            if result == true {
+                                word.correct()
+                            } else {
+                                word.incorrect()
+                            }
+                        } else if allCorrect {
+                            word.learned = true
+                        }
+                    }
+                    
+                    break
+                }
+            }
+        }
+        
+        save()
+        notify()
+    }
 }

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14109" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch42" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14031"/>
+    </dependencies>
+    <scenes>
+        <!--Start Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="StartInterfaceController" customModule="Watch" customModuleProvider="target">
+                    <items>
+                        <button width="1" alignment="left" verticalAlignment="center" title="Start" id="Pva-kA-rWZ">
+                            <connections>
+                                <action selector="startButtonPressed" destination="AgC-eL-Hgc" id="Fl4-YV-CTg"/>
+                            </connections>
+                        </button>
+                    </items>
+                </controller>
+            </objects>
+        </scene>
+        <!--Done-->
+        <scene sceneID="hMW-7a-mFM">
+            <objects>
+                <controller identifier="Done" id="B2w-e4-x99" customClass="DoneInterfaceController" customModule="Watch_Extension">
+                    <items>
+                        <button width="1" alignment="left" verticalAlignment="center" id="H6v-Fz-sEY">
+                            <connections>
+                                <action selector="commitButtonPressed" destination="B2w-e4-x99" id="4Ob-Gi-FJZ"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="commitButton" destination="H6v-Fz-sEY" id="ox3-hf-k1A"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="133" y="398"/>
+        </scene>
+        <!--Test-->
+        <scene sceneID="gOQ-aK-Z6V">
+            <objects>
+                <controller identifier="Test" id="xNI-2f-IOA" customClass="TestInterfaceController" customModule="Watch_Extension">
+                    <items>
+                        <group width="1" height="0.66000000000000003" alignment="left" layout="vertical" spacing="0.0" id="fs4-WH-Z3w">
+                            <items>
+                                <group width="1" alignment="left" id="QsK-5e-7jH">
+                                    <items>
+                                        <label alignment="center" text="Label" textAlignment="center" id="uYZ-K9-FR7">
+                                            <color key="textColor" red="1" green="0.90196078431372551" blue="0.12549019607843137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="left" id="rxb-US-FJy">
+                                    <items>
+                                        <label alignment="center" verticalAlignment="center" text="Label" textAlignment="center" numberOfLines="2" id="hvd-l9-cl9">
+                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="left" id="ScH-OY-YP3">
+                                    <items>
+                                        <label alignment="center" text="Label" textAlignment="center" numberOfLines="3" id="DqK-Tw-E2A">
+                                            <color key="textColor" red="1" green="0.90196078430000004" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </label>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                        <group width="1" height="0.33000000000000002" alignment="left" spacing="10" id="bV4-oT-bpD">
+                            <items>
+                                <button width="0.5" height="1" alignment="left" title="✗" id="VS4-Rl-4X9">
+                                    <connections>
+                                        <action selector="checkFalsePressed" destination="xNI-2f-IOA" id="iOk-Ig-hEG"/>
+                                    </connections>
+                                </button>
+                                <button width="0.5" height="1" alignment="right" title="✓" id="Zjb-Z9-4bf">
+                                    <connections>
+                                        <action selector="checkTruePressed" destination="xNI-2f-IOA" id="CXV-ZR-NTm"/>
+                                    </connections>
+                                </button>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="10"/>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="falseButton" destination="VS4-Rl-4X9" id="B8n-iY-B86"/>
+                        <outlet property="meaningLabel" destination="DqK-Tw-E2A" id="PfN-pP-wel"/>
+                        <outlet property="trueButton" destination="Zjb-Z9-4bf" id="WTI-um-xsh"/>
+                        <outlet property="wordLabel" destination="hvd-l9-cl9" id="R5W-b0-7iv"/>
+                        <outlet property="yomiganaLabel" destination="uYZ-K9-FR7" id="8CH-Gm-ygO"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="112" y="235"/>
+        </scene>
+    </scenes>
+</document>

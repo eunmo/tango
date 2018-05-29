@@ -22,7 +22,8 @@ class LevelTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
-        wordLibrary = WordLibrary()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        wordLibrary = appDelegate.wordLibrary
         
         NotificationCenter.default.addObserver(self, selector: #selector(LevelTableViewController.receiveNotification), name: NSNotification.Name(rawValue: WordLibrary.notificationKey), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(LevelTableViewController.receiveNetNotification), name: NSNotification.Name(rawValue: WordLibrary.networkNotificationKey), object: nil)

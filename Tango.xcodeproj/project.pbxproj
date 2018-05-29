@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		542800461D9825F20003E854 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542800451D9825F20003E854 /* SwiftyJSON.swift */; };
+		544FA69E20BD7C3200128F17 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 544FA69C20BD7C3200128F17 /* Interface.storyboard */; };
+		544FA6A020BD7C3300128F17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 544FA69F20BD7C3300128F17 /* Assets.xcassets */; };
+		544FA6A720BD7C3300128F17 /* Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 544FA6A620BD7C3300128F17 /* Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		544FA6AC20BD7C3300128F17 /* StartInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544FA6AB20BD7C3300128F17 /* StartInterfaceController.swift */; };
+		544FA6AE20BD7C3300128F17 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544FA6AD20BD7C3300128F17 /* ExtensionDelegate.swift */; };
+		544FA6B020BD7C3400128F17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 544FA6AF20BD7C3400128F17 /* Assets.xcassets */; };
+		544FA6B420BD7C3400128F17 /* Watch.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 544FA69A20BD7C3200128F17 /* Watch.app */; };
+		544FA6BE20BD829F00128F17 /* TestInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544FA6BD20BD829F00128F17 /* TestInterfaceController.swift */; };
+		544FA6C020BDA2B400128F17 /* DoneInterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 544FA6BF20BDA2B400128F17 /* DoneInterfaceController.swift */; };
 		5450E0461C37ABB100E5A67B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E0451C37ABB100E5A67B /* AppDelegate.swift */; };
 		5450E04B1C37ABB100E5A67B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5450E0491C37ABB100E5A67B /* Main.storyboard */; };
 		5450E04D1C37ABB100E5A67B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5450E04C1C37ABB100E5A67B /* Assets.xcassets */; };
@@ -23,6 +32,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		544FA6A820BD7C3300128F17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5450E03A1C37ABB100E5A67B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 544FA6A520BD7C3300128F17;
+			remoteInfo = "Watch Extension";
+		};
+		544FA6B220BD7C3400128F17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5450E03A1C37ABB100E5A67B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 544FA69920BD7C3200128F17;
+			remoteInfo = Watch;
+		};
 		5450E0571C37ABB100E5A67B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5450E03A1C37ABB100E5A67B /* Project object */;
@@ -32,8 +55,44 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		544FA6BA20BD7C3400128F17 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				544FA6A720BD7C3300128F17 /* Watch Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		544FA6BC20BD7C3400128F17 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				544FA6B420BD7C3400128F17 /* Watch.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		542800451D9825F20003E854 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		544FA69A20BD7C3200128F17 /* Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Watch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		544FA69D20BD7C3200128F17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		544FA69F20BD7C3300128F17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		544FA6A120BD7C3300128F17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		544FA6A620BD7C3300128F17 /* Watch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Watch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		544FA6AB20BD7C3300128F17 /* StartInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartInterfaceController.swift; sourceTree = "<group>"; };
+		544FA6AD20BD7C3300128F17 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		544FA6AF20BD7C3400128F17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		544FA6B120BD7C3400128F17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		544FA6BD20BD829F00128F17 /* TestInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestInterfaceController.swift; sourceTree = "<group>"; };
+		544FA6BF20BDA2B400128F17 /* DoneInterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoneInterfaceController.swift; sourceTree = "<group>"; };
 		5450E0421C37ABB100E5A67B /* Tango.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tango.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5450E0451C37ABB100E5A67B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5450E04A1C37ABB100E5A67B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -53,6 +112,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		544FA6A320BD7C3300128F17 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5450E03F1C37ABB100E5A67B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -70,11 +136,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		544FA69B20BD7C3200128F17 /* Watch */ = {
+			isa = PBXGroup;
+			children = (
+				544FA69C20BD7C3200128F17 /* Interface.storyboard */,
+				544FA69F20BD7C3300128F17 /* Assets.xcassets */,
+				544FA6A120BD7C3300128F17 /* Info.plist */,
+			);
+			path = Watch;
+			sourceTree = "<group>";
+		};
+		544FA6AA20BD7C3300128F17 /* Watch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				544FA6AB20BD7C3300128F17 /* StartInterfaceController.swift */,
+				544FA6BD20BD829F00128F17 /* TestInterfaceController.swift */,
+				544FA6BF20BDA2B400128F17 /* DoneInterfaceController.swift */,
+				544FA6AD20BD7C3300128F17 /* ExtensionDelegate.swift */,
+				544FA6AF20BD7C3400128F17 /* Assets.xcassets */,
+				544FA6B120BD7C3400128F17 /* Info.plist */,
+			);
+			path = "Watch Extension";
+			sourceTree = "<group>";
+		};
 		5450E0391C37ABB100E5A67B = {
 			isa = PBXGroup;
 			children = (
 				5450E0441C37ABB100E5A67B /* Tango */,
 				5450E0591C37ABB100E5A67B /* TangoTests */,
+				544FA69B20BD7C3200128F17 /* Watch */,
+				544FA6AA20BD7C3300128F17 /* Watch Extension */,
 				5450E0431C37ABB100E5A67B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -84,6 +175,8 @@
 			children = (
 				5450E0421C37ABB100E5A67B /* Tango.app */,
 				5450E0561C37ABB100E5A67B /* TangoTests.xctest */,
+				544FA69A20BD7C3200128F17 /* Watch.app */,
+				544FA6A620BD7C3300128F17 /* Watch Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -120,6 +213,40 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		544FA69920BD7C3200128F17 /* Watch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 544FA6BB20BD7C3400128F17 /* Build configuration list for PBXNativeTarget "Watch" */;
+			buildPhases = (
+				544FA69820BD7C3200128F17 /* Resources */,
+				544FA6BA20BD7C3400128F17 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				544FA6A920BD7C3300128F17 /* PBXTargetDependency */,
+			);
+			name = Watch;
+			productName = Watch;
+			productReference = 544FA69A20BD7C3200128F17 /* Watch.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		544FA6A520BD7C3300128F17 /* Watch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 544FA6B920BD7C3400128F17 /* Build configuration list for PBXNativeTarget "Watch Extension" */;
+			buildPhases = (
+				544FA6A220BD7C3300128F17 /* Sources */,
+				544FA6A320BD7C3300128F17 /* Frameworks */,
+				544FA6A420BD7C3300128F17 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Watch Extension";
+			productName = "Watch Extension";
+			productReference = 544FA6A620BD7C3300128F17 /* Watch Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		5450E0411C37ABB100E5A67B /* Tango */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5450E05F1C37ABB100E5A67B /* Build configuration list for PBXNativeTarget "Tango" */;
@@ -127,10 +254,12 @@
 				5450E03E1C37ABB100E5A67B /* Sources */,
 				5450E03F1C37ABB100E5A67B /* Frameworks */,
 				5450E0401C37ABB100E5A67B /* Resources */,
+				544FA6BC20BD7C3400128F17 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				544FA6B320BD7C3400128F17 /* PBXTargetDependency */,
 			);
 			name = Tango;
 			productName = Tango;
@@ -161,10 +290,20 @@
 		5450E03A1C37ABB100E5A67B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = "Eunmo Yang";
 				TargetAttributes = {
+					544FA69920BD7C3200128F17 = {
+						CreatedOnToolsVersion = 9.3.1;
+						DevelopmentTeam = MN8Y3BHMSS;
+						ProvisioningStyle = Automatic;
+					};
+					544FA6A520BD7C3300128F17 = {
+						CreatedOnToolsVersion = 9.3.1;
+						DevelopmentTeam = MN8Y3BHMSS;
+						ProvisioningStyle = Automatic;
+					};
 					5450E0411C37ABB100E5A67B = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = MN8Y3BHMSS;
@@ -194,11 +333,30 @@
 			targets = (
 				5450E0411C37ABB100E5A67B /* Tango */,
 				5450E0551C37ABB100E5A67B /* TangoTests */,
+				544FA69920BD7C3200128F17 /* Watch */,
+				544FA6A520BD7C3300128F17 /* Watch Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		544FA69820BD7C3200128F17 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				544FA6A020BD7C3300128F17 /* Assets.xcassets in Resources */,
+				544FA69E20BD7C3200128F17 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		544FA6A420BD7C3300128F17 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				544FA6B020BD7C3400128F17 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5450E0401C37ABB100E5A67B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -220,6 +378,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		544FA6A220BD7C3300128F17 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				544FA6AE20BD7C3300128F17 /* ExtensionDelegate.swift in Sources */,
+				544FA6BE20BD829F00128F17 /* TestInterfaceController.swift in Sources */,
+				544FA6AC20BD7C3300128F17 /* StartInterfaceController.swift in Sources */,
+				544FA6C020BDA2B400128F17 /* DoneInterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5450E03E1C37ABB100E5A67B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -246,6 +415,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		544FA6A920BD7C3300128F17 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 544FA6A520BD7C3300128F17 /* Watch Extension */;
+			targetProxy = 544FA6A820BD7C3300128F17 /* PBXContainerItemProxy */;
+		};
+		544FA6B320BD7C3400128F17 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 544FA69920BD7C3200128F17 /* Watch */;
+			targetProxy = 544FA6B220BD7C3400128F17 /* PBXContainerItemProxy */;
+		};
 		5450E0581C37ABB100E5A67B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5450E0411C37ABB100E5A67B /* Tango */;
@@ -254,6 +433,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		544FA69C20BD7C3200128F17 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				544FA69D20BD7C3200128F17 /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
 		5450E0491C37ABB100E5A67B /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -273,6 +460,122 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		544FA6B520BD7C3400128F17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Eunmo Yang (BDAPA656WN)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MN8Y3BHMSS;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				IBSC_MODULE = Watch_Extension;
+				INFOPLIST_FILE = Watch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eunmoyang.Tango.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.3;
+			};
+			name = Debug;
+		};
+		544FA6B620BD7C3400128F17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Eunmo Yang (BDAPA656WN)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MN8Y3BHMSS;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				IBSC_MODULE = Watch_Extension;
+				INFOPLIST_FILE = Watch/Info.plist;
+				PRODUCT_BUNDLE_IDENTIFIER = com.eunmoyang.Tango.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.3;
+			};
+			name = Release;
+		};
+		544FA6B720BD7C3400128F17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MN8Y3BHMSS;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eunmoyang.Tango.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.3;
+			};
+			name = Debug;
+		};
+		544FA6B820BD7C3400128F17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = MN8Y3BHMSS;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "Watch Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.eunmoyang.Tango.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.3;
+			};
+			name = Release;
+		};
 		5450E05D1C37ABB100E5A67B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -379,7 +682,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: mica3721@gmail.com (LWB9F3PR9H)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Eunmo Yang (BDAPA656WN)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = MN8Y3BHMSS;
 				INFOPLIST_FILE = Tango/Info.plist;
@@ -396,7 +699,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: mica3721@gmail.com (LWB9F3PR9H)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Eunmo Yang (BDAPA656WN)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = MN8Y3BHMSS;
 				INFOPLIST_FILE = Tango/Info.plist;
@@ -442,6 +745,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		544FA6B920BD7C3400128F17 /* Build configuration list for PBXNativeTarget "Watch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				544FA6B720BD7C3400128F17 /* Debug */,
+				544FA6B820BD7C3400128F17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		544FA6BB20BD7C3400128F17 /* Build configuration list for PBXNativeTarget "Watch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				544FA6B520BD7C3400128F17 /* Debug */,
+				544FA6B620BD7C3400128F17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5450E03D1C37ABB100E5A67B /* Build configuration list for PBXProject "Tango" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
