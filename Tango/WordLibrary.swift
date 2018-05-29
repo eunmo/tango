@@ -197,10 +197,7 @@ class WordLibrary {
         return count
     }
     
-    func getWordsForReview(indexPath: NSIndexPath? = nil) -> [Word] {
-        let levelsToReview = (indexPath != nil) ? getLevelsToReview(indexPath: indexPath!) : levels
-        var words = [Word]()
-        var wordsForReview = [Word]()
+    func getRefDate() -> Date {
         let curDate = Date()
         let calendar = Calendar.current
         var dateComponents = calendar.dateComponents(Set<Calendar.Component>([.day, .month, .year, .hour]), from: curDate)
@@ -212,7 +209,15 @@ class WordLibrary {
             dateComponents.hour = refHour
             dateComponents.day = dateComponents.day! + 1
         }
-        let refDate = calendar.date(from: dateComponents)!
+        
+        return calendar.date(from: dateComponents)!
+    }
+    
+    func getWordsForReview(indexPath: NSIndexPath? = nil) -> [Word] {
+        let levelsToReview = (indexPath != nil) ? getLevelsToReview(indexPath: indexPath!) : levels
+        var words = [Word]()
+        var wordsForReview = [Word]()
+        let refDate = getRefDate()
         
         for level in levelsToReview {
             words.append(contentsOf: level.getWordsToReview())
@@ -371,6 +376,18 @@ class WordLibrary {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: WordLibrary.networkNotificationKey), object: self)
     }
     
+    func getTestWord(level: Level, word: Word) -> [String: Any] {
+        var testWord = [String: Any]()
+        
+        testWord["level"] = level.name
+        testWord["index"] = word.index
+        testWord["word"] = word.word
+        testWord["yomigana"] = word.yomigana
+        testWord["meaning"] = word.meaning
+        
+        return testWord
+    }
+    
     func getTestMaterial() -> [[String: Any]] {
         var words = [[String: Any]]()
         
@@ -381,17 +398,33 @@ class WordLibrary {
             
             for i in 0..<limit {
                 let word = wordsToLearn[i]
-                var testWord = [String: Any]()
-                testWord["level"] = level.name
-                testWord["index"] = word.index
-                testWord["word"] = word.word
-                testWord["yomigana"] = word.yomigana
-                testWord["meaning"] = word.meaning
-                words.append(testWord)
+                words.append(getTestWord(level: level, word: word))
             }
         } else {
-            //
+            for i in 0..<WordLibrary.languageCount {
+                let path = NSIndexPath(row: 1, section: i)
+                let levelsToReview = getLevelsToReview(indexPath: path)
+                
+                for level in levelsToReview {
+                    let wordsToReview = level.getWordsToReview()
+                    
+                    for word in wordsToReview {
+                        words.append(getTestWord(level: level, word: word))
+                    }
+                }
+                
+                if words.count > 10 {
+                    words.shuffle()
+                    let count = words.count
+                    words.removeSubrange(10..<count)
+                }
+                
+                if words.count > 0 {
+                    break
+                }
+            }
         }
+        
         words.shuffle()
         
         return words
