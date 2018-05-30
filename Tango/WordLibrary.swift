@@ -401,15 +401,28 @@ class WordLibrary {
                 words.append(getTestWord(level: level, word: word))
             }
         } else {
+            let refDate = getRefDate()
+            
             for i in 0..<WordLibrary.languageCount {
-                let path = NSIndexPath(row: 1, section: i)
+                let path = NSIndexPath(row: i, section: 1)
                 let levelsToReview = getLevelsToReview(indexPath: path)
                 
                 for level in levelsToReview {
                     let wordsToReview = level.getWordsToReview()
                     
                     for word in wordsToReview {
-                        words.append(getTestWord(level: level, word: word))
+                        var add = true
+                        
+                        if let interval = word.lastCorrect?.timeIntervalSince(refDate) {
+                            let timeLimit = Double(word.streak) * -86400
+                            if (timeLimit < interval || word.streak > 10) {
+                                add = false
+                            }
+                        }
+                        
+                        if add {
+                            words.append(getTestWord(level: level, word: word))
+                        }
                     }
                 }
                 

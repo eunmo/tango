@@ -48,27 +48,16 @@
                     <items>
                         <group width="1" height="0.66000000000000003" alignment="left" layout="vertical" spacing="0.0" id="fs4-WH-Z3w">
                             <items>
-                                <group width="1" alignment="left" id="QsK-5e-7jH">
-                                    <items>
-                                        <label alignment="center" text="Label" textAlignment="center" id="uYZ-K9-FR7">
-                                            <color key="textColor" red="1" green="0.90196078431372551" blue="0.12549019607843137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </label>
-                                    </items>
-                                </group>
-                                <group width="1" alignment="left" id="rxb-US-FJy">
-                                    <items>
-                                        <label alignment="center" verticalAlignment="center" text="Label" textAlignment="center" numberOfLines="2" id="hvd-l9-cl9">
-                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
-                                        </label>
-                                    </items>
-                                </group>
-                                <group width="1" alignment="left" id="ScH-OY-YP3">
-                                    <items>
-                                        <label alignment="center" text="Label" textAlignment="center" numberOfLines="3" id="DqK-Tw-E2A">
-                                            <color key="textColor" red="1" green="0.90196078430000004" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </label>
-                                    </items>
-                                </group>
+                                <label alignment="center" text="Label" textAlignment="center" id="uYZ-K9-FR7">
+                                    <color key="textColor" red="1" green="0.90196078431372551" blue="0.12549019607843137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" type="system" pointSize="14"/>
+                                </label>
+                                <label alignment="center" text="Label" textAlignment="center" minimumScaleFactor="0.33000000000000002" id="hvd-l9-cl9">
+                                    <fontDescription key="font" type="system" pointSize="32"/>
+                                </label>
+                                <label alignment="center" text="Label" textAlignment="center" numberOfLines="3" id="DqK-Tw-E2A">
+                                    <color key="textColor" red="1" green="0.90196078430000004" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </label>
                             </items>
                         </group>
                         <group width="1" height="0.33000000000000002" alignment="left" spacing="10" id="bV4-oT-bpD">
