@@ -52,9 +52,10 @@ class DoneInterfaceController: WKInterfaceController {
         var commitWords = [[String: Any]]()
         for word in words! {
             var commitWord = [String: Any]()
+            commitWord["result"] = word.result
             commitWord["level"] = word.level
             commitWord["index"] = word.levelIndex
-            commitWord["result"] = word.result
+            commitWord["streak"] = word.streak
             commitWords.append(commitWord)
         }
         message["words"] = commitWords as Any

@@ -14,6 +14,7 @@ class WordLibrary {
     var levels = [Level]()
     var levelsToLearn = [Level]()
     var testLimit = 30
+    var watchTestLimit = 7
     let refHour = 5
     let dateFormatter: DateFormatter = DateFormatter()
     
@@ -384,6 +385,7 @@ class WordLibrary {
         testWord["word"] = word.word
         testWord["yomigana"] = word.yomigana
         testWord["meaning"] = word.meaning
+        testWord["streak"] = word.streak
         
         return testWord
     }
@@ -394,7 +396,7 @@ class WordLibrary {
         if levelsToLearn.count > 0 {
             let level = levelsToLearn[0]
             let wordsToLearn = level.getWordsToLearn()
-            let limit = min(10, wordsToLearn.count)
+            let limit = min(watchTestLimit, wordsToLearn.count)
             
             for i in 0..<limit {
                 let word = wordsToLearn[i]
@@ -426,10 +428,10 @@ class WordLibrary {
                     }
                 }
                 
-                if words.count > 10 {
+                if words.count > watchTestLimit {
                     words.shuffle()
                     let count = words.count
-                    words.removeSubrange(10..<count)
+                    words.removeSubrange(watchTestLimit..<count)
                 }
                 
                 if words.count > 0 {
@@ -457,15 +459,18 @@ class WordLibrary {
             let result = word["result"] as! Bool
             let levelName = word["level"] as! String
             let index = word["index"] as! Int
+            let streak = word["streak"] as! Int
             
             for level in levels {
                 if (level.name == levelName) {
                     if let word = level.getWord(index: index) {
                         if word.learned {
-                            if result == true {
-                                word.correct()
-                            } else {
-                                word.incorrect()
+                            if word.streak == streak {
+                                if result == true {
+                                    word.correct()
+                                } else {
+                                    word.incorrect()
+                                }
                             }
                         } else if allCorrect {
                             word.learned = true

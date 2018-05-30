@@ -18,15 +18,17 @@ class TestWord {
     let levelIndex: Int
     let yomigana: String
     let meaning: String
+    let streak: Int
     var result: Bool?
     
-    init(index: Int, word: String, level: String, levelIndex: Int, yomigana: String, meaning: String) {
+    init(index: Int, word: String, level: String, levelIndex: Int, yomigana: String, meaning: String, streak: Int) {
         self.index = index
         self.word = word
         self.level = level
         self.levelIndex = levelIndex
         self.yomigana = yomigana
         self.meaning = meaning
+        self.streak = streak
     }
 }
 
@@ -62,8 +64,9 @@ class StartInterfaceController: WKInterfaceController {
                     let levelIndex = word["index"] as! Int
                     let yomigana = word["yomigana"] as! String
                     let meaning = word["meaning"] as! String
+                    let streak = word["streak"] as! Int
                     let word = word["word"] as! String
-                    contexts.append(TestWord(index: index, word: word, level: level, levelIndex: levelIndex, yomigana: yomigana, meaning: meaning))
+                    contexts.append(TestWord(index: index, word: word, level: level, levelIndex: levelIndex, yomigana: yomigana, meaning: meaning, streak: streak))
                 }
                 controllers.append("Done")
                 contexts.append(contexts)
