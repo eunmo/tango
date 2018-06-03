@@ -134,15 +134,14 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
             setWord(word: word)
         } else if review {
             let title = getTitleString()
-            let message = getStreakString()
             
-            let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+            let alertController = UIAlertController(title: title, message: "", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Prev", style: UIAlertActionStyle.default, handler: prevHandler))
             alertController.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: finishReview))
             alertController.preferredAction = alertController.actions[1] // Done
             present(alertController, animated: true, completion: nil)
         } else if incorrect.count > 0 {
-            let alertController = UIAlertController(title: "\(incorrect.count) wrong", message: "", preferredStyle: UIAlertControllerStyle.alert)
+            let alertController = UIAlertController(title: "\(incorrect.count)/\(words.count) wrong", message: "", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Restart", style: UIAlertActionStyle.default, handler: restart))
             present(alertController, animated: true, completion: nil)
         } else {
@@ -196,43 +195,7 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     func getTitleString() -> String {
         let duration = Int(-startTime!.timeIntervalSinceNow)
-        return String(format: "%d correct in %02d:%02d", arguments: [correct.count, duration / 60, duration % 60])
-    }
-    
-    func getStreakString() -> String {
-        
-        var maxStreak = 0
-        var minStreak = 0
-        
-        for word in words {
-            if maxStreak < word.streak {
-                maxStreak = word.streak
-            }
-            
-            if minStreak > word.streak {
-                minStreak = word.streak
-            }
-        }
-        
-        var streaks = [(correct: Int, total: Int)](repeating: (correct: 0, total: 0), count: maxStreak - minStreak + 1)
-        
-        for word in words {
-            if (correct.contains(word)) {
-                streaks[maxStreak - word.streak].correct += 1
-            }
-            
-            streaks[maxStreak - word.streak].total += 1
-        }
-        
-        var string = "Streaks"
-        
-        for (index, streak) in streaks.enumerated() {
-            if streak.total != 0 {
-                string += String(format: "\n%02d:\t+%02d\t-%02d", arguments: [maxStreak - index, streak.correct, streak.total - streak.correct])
-            }
-        }
-        
-        return string
+        return String(format: "%d/%d correct in %02d:%02d", arguments: [correct.count, words.count, duration / 60, duration % 60])
     }
 
     // MARK: - Navigation
