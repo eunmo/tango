@@ -14,12 +14,13 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var yomiganaLabel: UILabel!
     @IBOutlet weak var wordLabel: UILabel!
     @IBOutlet weak var meaningLabel: UILabel!
-    @IBOutlet weak var meaningView: UIView!
-    
+    @IBOutlet weak var meaningBackground: UIVisualEffectView!
     @IBOutlet weak var progressCollectionView: UICollectionView!
     
+    @IBOutlet weak var trueButton: UIButton!
+    @IBOutlet weak var falseButton: UIButton!
+    
     var review = false
-    var showDetails = false
     var words = [Word]()
     var correct = [Word]()
     var incorrect = [Word]()
@@ -29,6 +30,29 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var text = ""
     var wordLibrary: WordLibrary?
     var startTime: Date?
+    
+    var showDetails = false {
+        didSet {
+            yomiganaLabel.isHidden = !showDetails
+            meaningLabel.isHidden = !showDetails
+            meaningBackground.isHidden = !showDetails
+        }
+    }
+    
+    var curResult: Bool? = nil {
+        didSet {
+            trueButton.backgroundColor = UIColor.gray
+            falseButton.backgroundColor = UIColor.gray
+            
+            if let result = curResult {
+                if result == false {
+                    falseButton.backgroundColor = UIColor(red: 252/255, green: 33/255, blue: 37/255, alpha: 1)
+                } else {
+                    trueButton.backgroundColor = UIColor(red: 86/255, green: 215/255, blue: 43/255, alpha: 1)
+                }
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,13 +64,6 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
         if words.count > 0 {
             words.shuffle()
             startTime = Date()
-            if review {
-                for word in words {
-                    if word.lastCorrect != nil {
-                        print("\(word.word)\t\(word.streak)\t\(word.lastCorrect!)\t\(word.lastCorrect!.timeIntervalSince(startTime!))")
-                    }
-                }
-            }
             setWord(word: words[0])
         }
     }
@@ -76,10 +93,8 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func setWord(word: Word) {
-        showDetails = false;
-        
-        yomiganaLabel.isHidden = true;
-        meaningLabel.isHidden = true;
+        showDetails = false
+        curResult = nil
         
         wordLabel.text = word.word
         yomiganaLabel.text = "\(word.yomigana)  "
@@ -232,32 +247,24 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
     // MARK: Actions
     
-    @IBAction func meaningViewTapped(_ sender: UITapGestureRecognizer) {
-        if !showDetails {
-            showDetails = true;
-            
-            yomiganaLabel.isHidden = false;
-            meaningLabel.isHidden = false;
+    @IBAction func negativeButtonPressed(_ sender: UIButton) {
+        if curResult != nil {
+            incorrect.append(getWord())
+            next()
         } else {
-            showDetails = false;
-            
-            yomiganaLabel.isHidden = true;
-            meaningLabel.isHidden = true;
+            curResult = false
+            showDetails = !showDetails
         }
     }
     
-    @IBAction func negativeButtonPressed(_ sender: UIButton) {
-        incorrect.append(getWord())
-        next()
-    }
-    
     @IBAction func positivieButtonPressed(_ sender: UIButton) {
-        correct.append(getWord())
-        next()
-    }
-    
-    @IBAction func prevButtonPressed(_ sender: UIBarButtonItem) {
-        prev()
+        if curResult != nil {
+            correct.append(getWord())
+            next()
+        } else {
+            curResult = true
+            showDetails = !showDetails
+        }
     }
     
     @IBAction func lowerPrevButtonPressed(_ sender: UIButton) {

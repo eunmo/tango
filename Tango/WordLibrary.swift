@@ -13,7 +13,7 @@ class WordLibrary {
     // MARK: Properties
     var levels = [Level]()
     var levelsToLearn = [Level]()
-    var testLimit = 30
+    var testLimit = 7
     var watchTestLimit = 7
     let refHour = 5
     let dateFormatter: DateFormatter = DateFormatter()
