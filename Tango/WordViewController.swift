@@ -19,6 +19,7 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     @IBOutlet weak var trueButton: UIButton!
     @IBOutlet weak var falseButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     
     var review = false
     var words = [Word]()
@@ -41,16 +42,19 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     var curResult: Bool? = nil {
         didSet {
-            trueButton.backgroundColor = UIColor.gray
-            falseButton.backgroundColor = UIColor.gray
+            var trueButtonHollow = true
+            var falseButtonHollow = true
             
             if let result = curResult {
                 if result == false {
-                    falseButton.backgroundColor = UIColor(red: 252/255, green: 33/255, blue: 37/255, alpha: 1)
+                    falseButtonHollow = false
                 } else {
-                    trueButton.backgroundColor = UIColor(red: 86/255, green: 215/255, blue: 43/255, alpha: 1)
+                    trueButtonHollow = false
                 }
             }
+            
+            setButtonMask(button: trueButton, isHollow: trueButtonHollow)
+            setButtonMask(button: falseButton, isHollow: falseButtonHollow)
         }
     }
     
@@ -59,6 +63,8 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         progressCollectionView.delegate = self
         progressCollectionView.dataSource = self
+        
+        setButtonMask(button: backButton, isHollow: true)
 
         // Do any additional setup after loading the view.
         if words.count > 0 {
@@ -71,6 +77,33 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func setButtonMask(button: UIButton, isHollow: Bool) {
+        let width = button.bounds.width
+        let height = button.bounds.height
+        let radius: CGFloat = 25
+        let diameter = radius * 2
+        let borderWidth: CGFloat = 10
+        
+        let path = UIBezierPath(roundedRect: button.bounds, cornerRadius: radius)
+        
+        if (isHollow) {
+            let innerRect = CGRect(x: borderWidth, y: borderWidth, width: width - 2 * borderWidth, height: height - 2 * borderWidth)
+            let innerPath = UIBezierPath(roundedRect: innerRect, cornerRadius: radius - borderWidth)
+            path.append(innerPath)
+            
+            let rect = CGRect(x: width / 2 - radius, y: height / 2 - radius, width: diameter, height: diameter)
+            let circlePath  = UIBezierPath(ovalIn: rect)
+            path.append(circlePath)
+        }
+        
+        let maskLayer = CAShapeLayer()
+        maskLayer.frame = button.bounds
+        maskLayer.fillRule = kCAFillRuleEvenOdd
+        maskLayer.path = path.cgPath
+        
+        button.layer.mask = maskLayer
     }
     
     func updateUI() {

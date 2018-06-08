@@ -36,7 +36,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5e4-Er-cWK">
-                                <rect key="frame" x="16" y="438" width="168" height="274"/>
+                                <rect key="frame" x="16" y="438" width="163.66666666666666" height="226"/>
                                 <color key="backgroundColor" name="systemRedColor" catalog="System" colorSpace="catalog"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="✗">
@@ -47,7 +47,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RJw-w9-SWX">
-                                <rect key="frame" x="192" y="438" width="167" height="332"/>
+                                <rect key="frame" x="195.66666666666663" y="438" width="163.33333333333337" height="332"/>
                                 <color key="backgroundColor" name="systemGreenColor" catalog="System" colorSpace="catalog"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                 <state key="normal" title="✓">
@@ -72,13 +72,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vaO-wO-s46">
-                                <rect key="frame" x="16" y="720" width="168" height="50"/>
+                                <rect key="frame" x="16" y="680" width="163.66666666666666" height="90"/>
                                 <color key="backgroundColor" name="systemYellowColor" catalog="System" colorSpace="catalog"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="ht0-K2-65T"/>
+                                    <constraint firstAttribute="height" constant="90" id="ht0-K2-65T"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="30"/>
-                                <state key="normal" title="&lt;">
+                                <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                <state key="normal" title="←">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -125,15 +125,15 @@
                             <constraint firstAttribute="trailingMargin" secondItem="9Ro-eF-sYR" secondAttribute="trailing" constant="8" id="X0M-ey-SF7"/>
                             <constraint firstItem="JLW-1n-Mf2" firstAttribute="centerX" secondItem="vvV-Sv-3qv" secondAttribute="centerX" id="YBB-Xj-K5R"/>
                             <constraint firstAttribute="trailingMargin" secondItem="aj4-9l-EV5" secondAttribute="trailing" id="arp-oh-A3y"/>
-                            <constraint firstItem="vaO-wO-s46" firstAttribute="top" secondItem="5e4-Er-cWK" secondAttribute="bottom" constant="8" id="bPJ-Jz-IKq"/>
+                            <constraint firstItem="vaO-wO-s46" firstAttribute="top" secondItem="5e4-Er-cWK" secondAttribute="bottom" constant="16" id="bPJ-Jz-IKq"/>
                             <constraint firstItem="vvV-Sv-3qv" firstAttribute="top" secondItem="9Ro-eF-sYR" secondAttribute="bottom" constant="8" id="bXT-bT-8VI"/>
-                            <constraint firstItem="RJw-w9-SWX" firstAttribute="leading" secondItem="vvV-Sv-3qv" secondAttribute="centerX" constant="4" id="e9j-iK-hIb"/>
+                            <constraint firstItem="RJw-w9-SWX" firstAttribute="leading" secondItem="vvV-Sv-3qv" secondAttribute="centerX" constant="8" id="e9j-iK-hIb"/>
                             <constraint firstItem="JLW-1n-Mf2" firstAttribute="height" secondItem="vvV-Sv-3qv" secondAttribute="height" constant="8" id="gS3-oW-oa6"/>
                             <constraint firstItem="aj4-9l-EV5" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="jzg-30-eOE"/>
                             <constraint firstItem="vvV-Sv-3qv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="30" id="oLO-jZ-zWq"/>
                             <constraint firstItem="RJw-w9-SWX" firstAttribute="top" secondItem="9Ro-eF-sYR" secondAttribute="bottom" constant="8" id="ojv-GI-xQa"/>
                             <constraint firstItem="aj4-9l-EV5" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="qm3-m1-Zpt"/>
-                            <constraint firstItem="vvV-Sv-3qv" firstAttribute="centerX" secondItem="5e4-Er-cWK" secondAttribute="trailing" constant="4" id="u2l-kx-VM3"/>
+                            <constraint firstItem="vvV-Sv-3qv" firstAttribute="centerX" secondItem="5e4-Er-cWK" secondAttribute="trailing" constant="8" id="u2l-kx-VM3"/>
                             <constraint firstItem="9Ro-eF-sYR" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="vEf-9f-kOq"/>
                             <constraint firstItem="5e4-Er-cWK" firstAttribute="top" secondItem="9Ro-eF-sYR" secondAttribute="bottom" constant="8" id="wLO-Nb-mXg"/>
                             <constraint firstItem="JLW-1n-Mf2" firstAttribute="centerY" secondItem="vvV-Sv-3qv" secondAttribute="centerY" id="xfI-5f-v7x"/>
@@ -142,6 +142,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="mXq-G5-zv8"/>
                     <connections>
+                        <outlet property="backButton" destination="vaO-wO-s46" id="hcP-dm-SX4"/>
                         <outlet property="falseButton" destination="5e4-Er-cWK" id="P9e-rn-ybc"/>
                         <outlet property="meaningBackground" destination="JLW-1n-Mf2" id="fU2-NO-VYO"/>
                         <outlet property="meaningLabel" destination="vvV-Sv-3qv" id="qKx-em-3fs"/>
