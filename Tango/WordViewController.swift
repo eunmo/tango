@@ -211,22 +211,22 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
     // MARK: Actions
     
     @IBAction func negativeButtonPressed(_ sender: UIButton) {
-        if curResult != nil {
+        if curResult == false {
             incorrect.append(getWord())
             next()
         } else {
             curResult = false
-            showDetails = !showDetails
+            showDetails = true
         }
     }
     
     @IBAction func positivieButtonPressed(_ sender: UIButton) {
-        if curResult != nil {
+        if curResult == true {
             correct.append(getWord())
             next()
         } else {
             curResult = true
-            showDetails = !showDetails
+            showDetails = true
         }
     }
     
