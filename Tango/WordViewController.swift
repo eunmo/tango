@@ -8,18 +8,17 @@
 
 import UIKit
 
-class WordViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class WordViewController: UIViewController {
 
     // MARK: Properties
     @IBOutlet weak var yomiganaLabel: UILabel!
     @IBOutlet weak var wordLabel: UILabel!
     @IBOutlet weak var meaningLabel: UILabel!
-    @IBOutlet weak var meaningBackground: UIVisualEffectView!
-    @IBOutlet weak var progressCollectionView: UICollectionView!
+    @IBOutlet weak var progressButton: UIButton!
+    @IBOutlet weak var upperView: UIView!
     
     @IBOutlet weak var trueButton: UIButton!
     @IBOutlet weak var falseButton: UIButton!
-    @IBOutlet weak var backButton: UIButton!
     
     var review = false
     var words = [Word]()
@@ -32,39 +31,48 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var wordLibrary: WordLibrary?
     var startTime: Date?
     
+    var layers = [CAShapeLayer]()
+    
     var showDetails = false {
         didSet {
             yomiganaLabel.isHidden = !showDetails
             meaningLabel.isHidden = !showDetails
-            meaningBackground.isHidden = !showDetails
         }
     }
     
+    let green = UIColor(red: 86/255, green: 215/255, blue: 43/255, alpha: 1).cgColor
+    let red = UIColor(red: 252/255, green: 33/255, blue: 37/255, alpha: 1).cgColor
+    let yellow = UIColor(red: 254/255, green: 195/255, blue: 9/255, alpha: 1).cgColor
+    
     var curResult: Bool? = nil {
         didSet {
-            var trueButtonHollow = true
-            var falseButtonHollow = true
             
             if let result = curResult {
                 if result == false {
-                    falseButtonHollow = false
+                    // system red
+                    upperView.layer.borderColor = red
                 } else {
-                    trueButtonHollow = false
+                    // system green
+                    upperView.layer.borderColor = green
                 }
+            } else {
+                // system yellow
+                upperView.layer.borderColor = yellow
             }
-            
-            setButtonMask(button: trueButton, isHollow: trueButtonHollow)
-            setButtonMask(button: falseButton, isHollow: falseButtonHollow)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        progressCollectionView.delegate = self
-        progressCollectionView.dataSource = self
+        title = text
         
-        setButtonMask(button: backButton, isHollow: true)
+        upperView.layer.borderWidth = 10
+        upperView.layer.cornerRadius = 25
+        
+        setViewMask(view: trueButton, isHollow: true)
+        setViewMask(view: falseButton, isHollow: true)
+        setupProgressView()
 
         // Do any additional setup after loading the view.
         if words.count > 0 {
@@ -79,14 +87,34 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
         // Dispose of any resources that can be recreated.
     }
     
-    func setButtonMask(button: UIButton, isHollow: Bool) {
-        let width = button.bounds.width
-        let height = button.bounds.height
+    override func prefersHomeIndicatorAutoHidden() -> Bool {
+        return true
+    }
+    
+    func setupProgressView() {
+        let diameter: CGFloat = 30
+        let space: CGFloat = 15
+        let offset = progressButton.bounds.width - (CGFloat(words.count) * diameter) - ((CGFloat(words.count) - 1) * space)
+        
+        for i in 0..<words.count {
+            let layer = CAShapeLayer()
+            let x = CGFloat(i) * (diameter + space) + offset / 2
+            let rect = CGRect(x: x, y: 10, width: diameter, height: diameter)
+            layer.path = UIBezierPath(ovalIn: rect).cgPath
+            layer.fillColor = UIColor.gray.cgColor
+            layers.append(layer)
+            progressButton.layer.addSublayer(layer)
+        }
+    }
+    
+    func setViewMask(view: UIView, isHollow: Bool) {
+        let width = view.bounds.width
+        let height = view.bounds.height
         let radius: CGFloat = 25
         let diameter = radius * 2
         let borderWidth: CGFloat = 10
         
-        let path = UIBezierPath(roundedRect: button.bounds, cornerRadius: radius)
+        let path = UIBezierPath(roundedRect: view.bounds, cornerRadius: radius)
         
         if (isHollow) {
             let innerRect = CGRect(x: borderWidth, y: borderWidth, width: width - 2 * borderWidth, height: height - 2 * borderWidth)
@@ -99,16 +127,27 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
         
         let maskLayer = CAShapeLayer()
-        maskLayer.frame = button.bounds
+        maskLayer.frame = view.bounds
         maskLayer.fillRule = kCAFillRuleEvenOdd
         maskLayer.path = path.cgPath
         
-        button.layer.mask = maskLayer
+        view.layer.mask = maskLayer
     }
     
     func updateUI() {
-        title = text
-        progressCollectionView.reloadData()
+        for (index, word) in words.enumerated() {
+            let layer = layers[index]
+            
+            if correct.contains(word) {
+                layer.fillColor = green
+            } else if incorrect.contains(word) {
+                layer.fillColor = red
+            } else if index == self.index {
+                layer.fillColor = yellow
+            } else {
+                layer.fillColor = UIColor.lightGray.cgColor
+            }
+        }
     }
     
     func getWord() -> Word {
@@ -263,61 +302,11 @@ class WordViewController: UIViewController, UICollectionViewDelegate, UICollecti
         }
     }
     
-    @IBAction func lowerPrevButtonPressed(_ sender: UIButton) {
+    @IBAction func prevButtonPressed(_ sender: UIButton) {
         prev()
     }
-    
-    // MARK: UICollectionViewDataSource
-    
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return pass + 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return words.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ProgressCollectionViewCell", for: indexPath as IndexPath)
-        
-        // Configure the cell
-        var shrink = false
-        
-        if indexPath.section < pass {
-            if indexPath.row < prevWrongCount {
-                cell.backgroundColor = UIColor.orange
-            } else {
-                cell.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 1.0, alpha: 1.0)
-            }
-            
-            shrink = true
-        } else {
-            let word = words[indexPath.row]
-            
-            if indexPath.row == index {
-                cell.backgroundColor = UIColor.darkGray
-            } else if incorrect.contains(word) {
-                cell.backgroundColor = UIColor.orange
-            } else if correct.contains(word) {
-                cell.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 1.0, alpha: 1.0)
-                
-                shrink = true
-            } else {
-                cell.backgroundColor = UIColor.lightGray
-                
-                shrink = true
-            }
-        }
-        
-        if shrink {
-            cell.layer.bounds = CGRect(x: 1.0, y: 1.0, width: 4.5, height: 4.5)
-            cell.layer.cornerRadius = 2.25
-        } else {
-            cell.layer.bounds = CGRect(x: 0, y: 0, width: 6, height: 6)
-            cell.layer.cornerRadius = 3
-        }
-        
-        return cell
+    @IBAction func lowerPrevButtonPressed(_ sender: UIButton) {
+        prev()
     }
 }
 
