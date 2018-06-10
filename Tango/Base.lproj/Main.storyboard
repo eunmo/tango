@@ -51,7 +51,7 @@
                                 <rect key="frame" x="16" y="104" width="343" height="269"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="clip" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9Ro-eF-sYR">
-                                        <rect key="frame" x="0.0" y="111" width="343" height="48"/>
+                                        <rect key="frame" x="10" y="111" width="323" height="48"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="40"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -75,10 +75,10 @@
                                     <constraint firstItem="vvV-Sv-3qv" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="waY-zV-758" secondAttribute="leadingMargin" constant="30" id="KkO-ZU-OkW"/>
                                     <constraint firstItem="9Ro-eF-sYR" firstAttribute="firstBaseline" secondItem="RhD-No-EVc" secondAttribute="baseline" constant="44" symbolType="layoutAnchor" id="NtB-kL-EuK"/>
                                     <constraint firstItem="vvV-Sv-3qv" firstAttribute="centerX" secondItem="waY-zV-758" secondAttribute="centerX" id="YqO-AX-faf"/>
-                                    <constraint firstAttribute="trailing" secondItem="9Ro-eF-sYR" secondAttribute="trailing" id="cpb-VH-KJP"/>
+                                    <constraint firstAttribute="trailing" secondItem="9Ro-eF-sYR" secondAttribute="trailing" constant="10" id="cpb-VH-KJP"/>
                                     <constraint firstItem="9Ro-eF-sYR" firstAttribute="centerY" secondItem="waY-zV-758" secondAttribute="centerY" id="gEd-oc-eJQ"/>
                                     <constraint firstItem="vvV-Sv-3qv" firstAttribute="firstBaseline" secondItem="9Ro-eF-sYR" secondAttribute="baseline" constant="28" symbolType="layoutAnchor" id="jy3-wb-jPO"/>
-                                    <constraint firstItem="9Ro-eF-sYR" firstAttribute="leading" secondItem="waY-zV-758" secondAttribute="leading" id="zEE-GM-0tz"/>
+                                    <constraint firstItem="9Ro-eF-sYR" firstAttribute="leading" secondItem="waY-zV-758" secondAttribute="leading" constant="10" id="zEE-GM-0tz"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3R0-5K-Hjr">

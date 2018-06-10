@@ -56,8 +56,7 @@ class WordViewController: UIViewController {
                     upperView.layer.borderColor = green
                 }
             } else {
-                // system yellow
-                upperView.layer.borderColor = yellow
+                upperView.layer.borderColor = UIColor.clear.cgColor
             }
         }
     }
@@ -204,23 +203,14 @@ class WordViewController: UIViewController {
     func next() {
         if let word = nextWord() {
             setWord(word: word)
-        } else if review {
+        } else if review || incorrect.count == 0 {
+            index += 1
             let title = getTitleString()
-            
-            let alertController = UIAlertController(title: title, message: "", preferredStyle: UIAlertControllerStyle.alert)
-            alertController.addAction(UIAlertAction(title: "Prev", style: UIAlertActionStyle.default, handler: prevHandler))
-            alertController.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: finishReview))
-            alertController.preferredAction = alertController.actions[1] // Done
-            present(alertController, animated: true, completion: nil)
-        } else if incorrect.count > 0 {
+            let endWord = Word(index: 0, word: title, yomigana: "", meaning: "")!
+            setWord(word: endWord)
+        } else {
             let alertController = UIAlertController(title: "\(incorrect.count)/\(words.count) wrong", message: "", preferredStyle: UIAlertControllerStyle.alert)
             alertController.addAction(UIAlertAction(title: "Restart", style: UIAlertActionStyle.default, handler: restart))
-            present(alertController, animated: true, completion: nil)
-        } else {
-            let title = getTitleString()
-            
-            let alertController = UIAlertController(title: title, message: "", preferredStyle: UIAlertControllerStyle.alert)
-            alertController.addAction(UIAlertAction(title: "Done", style: UIAlertActionStyle.default, handler: dismiss))
             present(alertController, animated: true, completion: nil)
         }
     }
@@ -237,7 +227,7 @@ class WordViewController: UIViewController {
         setWord(word: word)
     }
     
-    func finishReview(action: UIAlertAction!) -> Void {
+    func finishReview() {
         for word in correct {
             word.correct()
         }
@@ -246,7 +236,7 @@ class WordViewController: UIViewController {
             word.incorrect()
         }
         
-        dismiss(action: action)
+        dismiss()
     }
     
     func restart(action: UIAlertAction!) -> Void {
@@ -260,7 +250,7 @@ class WordViewController: UIViewController {
         setWord(word: words[index])
     }
     
-    func dismiss(action: UIAlertAction!) -> Void {
+    func dismiss() {
         wordLibrary!.record(words: words)
         navigationController!.popViewController(animated: true)
     }
@@ -283,7 +273,8 @@ class WordViewController: UIViewController {
     // MARK: Actions
     
     @IBAction func negativeButtonPressed(_ sender: UIButton) {
-        if curResult == false {
+        if index == words.count {
+        } else if curResult == false {
             incorrect.append(getWord())
             next()
         } else {
@@ -293,7 +284,9 @@ class WordViewController: UIViewController {
     }
     
     @IBAction func positivieButtonPressed(_ sender: UIButton) {
-        if curResult == true {
+        if index == words.count {
+            finishReview()
+        } else if curResult == true {
             correct.append(getWord())
             next()
         } else {
@@ -303,9 +296,6 @@ class WordViewController: UIViewController {
     }
     
     @IBAction func prevButtonPressed(_ sender: UIButton) {
-        prev()
-    }
-    @IBAction func lowerPrevButtonPressed(_ sender: UIButton) {
         prev()
     }
 }
