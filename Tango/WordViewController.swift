@@ -25,8 +25,6 @@ class WordViewController: UIViewController {
     var correct = [Word]()
     var incorrect = [Word]()
     var index = 0
-    var pass = 0
-    var prevWrongCount = 0
     var text = ""
     var wordLibrary: WordLibrary?
     var startTime: Date?
@@ -227,30 +225,25 @@ class WordViewController: UIViewController {
         setWord(word: word)
     }
     
-    func finishReview() {
-        for word in correct {
-            word.correct()
-        }
-        
-        for word in incorrect {
-            word.incorrect()
-        }
-        
-        dismiss()
-    }
-    
     func restart(action: UIAlertAction!) -> Void {
-        pass = 1
-        prevWrongCount = incorrect.count
-        index = 0
-        
         correct = [Word]()
         incorrect = [Word]()
         words.shuffle()
+        index = 0
         setWord(word: words[index])
     }
     
     func dismiss() {
+        if review {
+            for word in correct {
+                word.correct()
+            }
+            
+            for word in incorrect {
+                word.incorrect()
+            }
+        }
+        
         wordLibrary!.record(words: words)
         navigationController!.popViewController(animated: true)
     }
@@ -285,7 +278,7 @@ class WordViewController: UIViewController {
     
     @IBAction func positivieButtonPressed(_ sender: UIButton) {
         if index == words.count {
-            finishReview()
+            dismiss()
         } else if curResult == true {
             correct.append(getWord())
             next()
