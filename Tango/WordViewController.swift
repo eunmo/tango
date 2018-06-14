@@ -38,9 +38,9 @@ class WordViewController: UIViewController {
         }
     }
     
-    let green = UIColor(red: 86/255, green: 215/255, blue: 43/255, alpha: 1).cgColor
-    let red = UIColor(red: 252/255, green: 33/255, blue: 37/255, alpha: 1).cgColor
-    let yellow = UIColor(red: 254/255, green: 195/255, blue: 9/255, alpha: 1).cgColor
+    let green = CommonUI.green.cgColor
+    let red = CommonUI.red.cgColor
+    let yellow = CommonUI.yellow.cgColor
     
     var curResult: Bool? = nil {
         didSet {
@@ -67,8 +67,8 @@ class WordViewController: UIViewController {
         upperView.layer.borderWidth = 10
         upperView.layer.cornerRadius = 25
         
-        setViewMask(view: trueButton, isHollow: true)
-        setViewMask(view: falseButton, isHollow: true)
+        CommonUI.setViewMask(view: trueButton, isHollow: true)
+        CommonUI.setViewMask(view: falseButton, isHollow: true)
         setupProgressView()
 
         // Do any additional setup after loading the view.
@@ -102,33 +102,6 @@ class WordViewController: UIViewController {
             layers.append(layer)
             progressButton.layer.addSublayer(layer)
         }
-    }
-    
-    func setViewMask(view: UIView, isHollow: Bool) {
-        let width = view.bounds.width
-        let height = view.bounds.height
-        let radius: CGFloat = 25
-        let diameter = radius * 2
-        let borderWidth: CGFloat = 10
-        
-        let path = UIBezierPath(roundedRect: view.bounds, cornerRadius: radius)
-        
-        if (isHollow) {
-            let innerRect = CGRect(x: borderWidth, y: borderWidth, width: width - 2 * borderWidth, height: height - 2 * borderWidth)
-            let innerPath = UIBezierPath(roundedRect: innerRect, cornerRadius: radius - borderWidth)
-            path.append(innerPath)
-            
-            let rect = CGRect(x: width / 2 - radius, y: height / 2 - radius, width: diameter, height: diameter)
-            let circlePath  = UIBezierPath(ovalIn: rect)
-            path.append(circlePath)
-        }
-        
-        let maskLayer = CAShapeLayer()
-        maskLayer.frame = view.bounds
-        maskLayer.fillRule = kCAFillRuleEvenOdd
-        maskLayer.path = path.cgPath
-        
-        view.layer.mask = maskLayer
     }
     
     func updateUI() {

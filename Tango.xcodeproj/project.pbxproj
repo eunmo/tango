@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		542800461D9825F20003E854 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 542800451D9825F20003E854 /* SwiftyJSON.swift */; };
+		5439630D20D2727E00C481E9 /* InitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5439630C20D2727E00C481E9 /* InitViewController.swift */; };
+		5439630F20D28AA400C481E9 /* CommonUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5439630E20D28AA400C481E9 /* CommonUI.swift */; };
 		544FA69E20BD7C3200128F17 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 544FA69C20BD7C3200128F17 /* Interface.storyboard */; };
 		544FA6A020BD7C3300128F17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 544FA69F20BD7C3300128F17 /* Assets.xcassets */; };
 		544FA6A720BD7C3300128F17 /* Watch Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 544FA6A620BD7C3300128F17 /* Watch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -23,7 +25,6 @@
 		5450E0501C37ABB100E5A67B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5450E04E1C37ABB100E5A67B /* LaunchScreen.storyboard */; };
 		5450E05B1C37ABB100E5A67B /* TangoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E05A1C37ABB100E5A67B /* TangoTests.swift */; };
 		5450E0661C37ADC100E5A67B /* WordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E0651C37ADC100E5A67B /* WordViewController.swift */; };
-		5450E0681C37C5CB00E5A67B /* LevelTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E0671C37C5CB00E5A67B /* LevelTableViewController.swift */; };
 		5450E06A1C37C97A00E5A67B /* Word.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E0691C37C97A00E5A67B /* Word.swift */; };
 		5450E06E1C382DFD00E5A67B /* WordLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E06D1C382DFD00E5A67B /* WordLibrary.swift */; };
 		5450E0701C382E6100E5A67B /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5450E06F1C382E6100E5A67B /* Level.swift */; };
@@ -82,6 +83,8 @@
 
 /* Begin PBXFileReference section */
 		542800451D9825F20003E854 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		5439630C20D2727E00C481E9 /* InitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitViewController.swift; sourceTree = "<group>"; };
+		5439630E20D28AA400C481E9 /* CommonUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonUI.swift; sourceTree = "<group>"; };
 		544FA69A20BD7C3200128F17 /* Watch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Watch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		544FA69D20BD7C3200128F17 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		544FA69F20BD7C3300128F17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -103,7 +106,6 @@
 		5450E05A1C37ABB100E5A67B /* TangoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TangoTests.swift; sourceTree = "<group>"; };
 		5450E05C1C37ABB100E5A67B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5450E0651C37ADC100E5A67B /* WordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordViewController.swift; sourceTree = "<group>"; };
-		5450E0671C37C5CB00E5A67B /* LevelTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelTableViewController.swift; sourceTree = "<group>"; };
 		5450E0691C37C97A00E5A67B /* Word.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Word.swift; sourceTree = "<group>"; };
 		5450E06D1C382DFD00E5A67B /* WordLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordLibrary.swift; sourceTree = "<group>"; };
 		5450E06F1C382E6100E5A67B /* Level.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
@@ -187,8 +189,9 @@
 				542800451D9825F20003E854 /* SwiftyJSON.swift */,
 				5450E0451C37ABB100E5A67B /* AppDelegate.swift */,
 				5450E0491C37ABB100E5A67B /* Main.storyboard */,
-				5450E0671C37C5CB00E5A67B /* LevelTableViewController.swift */,
+				5439630C20D2727E00C481E9 /* InitViewController.swift */,
 				5450E0651C37ADC100E5A67B /* WordViewController.swift */,
+				5439630E20D28AA400C481E9 /* CommonUI.swift */,
 				5450E0691C37C97A00E5A67B /* Word.swift */,
 				5450E06F1C382E6100E5A67B /* Level.swift */,
 				5450E06D1C382DFD00E5A67B /* WordLibrary.swift */,
@@ -394,10 +397,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5450E0701C382E6100E5A67B /* Level.swift in Sources */,
-				5450E0681C37C5CB00E5A67B /* LevelTableViewController.swift in Sources */,
 				54BE55DD1CB8C6C3002E53F3 /* StatsTableViewController.swift in Sources */,
 				542800461D9825F20003E854 /* SwiftyJSON.swift in Sources */,
 				5450E0661C37ADC100E5A67B /* WordViewController.swift in Sources */,
+				5439630D20D2727E00C481E9 /* InitViewController.swift in Sources */,
+				5439630F20D28AA400C481E9 /* CommonUI.swift in Sources */,
 				5450E06E1C382DFD00E5A67B /* WordLibrary.swift in Sources */,
 				5450E06A1C37C97A00E5A67B /* Word.swift in Sources */,
 				5450E0461C37ABB100E5A67B /* AppDelegate.swift in Sources */,

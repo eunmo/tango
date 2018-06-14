@@ -214,15 +214,21 @@ class WordLibrary {
         return calendar.date(from: dateComponents)!
     }
     
-    func getWordsForReview(indexPath: NSIndexPath? = nil) -> [Word] {
+    func getAllLearnedWords(indexPath: NSIndexPath? = nil) -> [Word] {
         let levelsToReview = (indexPath != nil) ? getLevelsToReview(indexPath: indexPath!) : levels
         var words = [Word]()
-        var wordsForReview = [Word]()
-        let refDate = getRefDate()
         
         for level in levelsToReview {
             words.append(contentsOf: level.getWordsToReview())
         }
+        
+        return words
+    }
+    
+    func getWordsForReview(indexPath: NSIndexPath? = nil) -> [Word] {
+        let words = getAllLearnedWords(indexPath: indexPath)
+        var wordsForReview = [Word]()
+        let refDate = getRefDate()
         
         for word in words {
             var add = true
@@ -240,16 +246,6 @@ class WordLibrary {
         }
         
         return wordsForReview
-    }
-    
-    func getAllLearnedWords() -> [Word] {
-        var words = [Word]()
-        
-        for level in levels {
-            words.append(contentsOf: level.getWordsToReview())
-        }
-        
-        return words
     }
     
     func getWords(indexPath: NSIndexPath) -> [Word] {
