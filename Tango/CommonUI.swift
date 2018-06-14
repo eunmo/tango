@@ -9,9 +9,11 @@
 import UIKit
 
 class CommonUI {
-    static let green = UIColor(red: 86/255, green: 215/255, blue: 43/255, alpha: 1)
     static let red = UIColor(red: 252/255, green: 33/255, blue: 37/255, alpha: 1)
+    static let orange = UIColor(red: 253/255, green: 130/255, blue: 8/255, alpha: 1)
     static let yellow = UIColor(red: 254/255, green: 195/255, blue: 9/255, alpha: 1)
+    static let green = UIColor(red: 86/255, green: 215/255, blue: 43/255, alpha: 1)
+    static let blue = UIColor(red: 29/255, green: 155/255, blue: 246/255, alpha: 1)
     
     static func setViewMask(view: UIView, isHollow: Bool) {
         let width = view.bounds.width

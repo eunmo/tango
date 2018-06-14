@@ -38,9 +38,11 @@ class WordViewController: UIViewController {
         }
     }
     
-    let green = CommonUI.green.cgColor
     let red = CommonUI.red.cgColor
     let yellow = CommonUI.yellow.cgColor
+    let orange = CommonUI.orange.cgColor
+    let blue = CommonUI.blue.cgColor
+    let green = CommonUI.green.cgColor
     
     var curResult: Bool? = nil {
         didSet {
@@ -48,10 +50,10 @@ class WordViewController: UIViewController {
             if let result = curResult {
                 if result == false {
                     // system red
-                    upperView.layer.borderColor = red
+                    upperView.layer.borderColor = orange
                 } else {
                     // system green
-                    upperView.layer.borderColor = green
+                    upperView.layer.borderColor = blue
                 }
             } else {
                 upperView.layer.borderColor = UIColor.clear.cgColor
@@ -109,11 +111,11 @@ class WordViewController: UIViewController {
             let layer = layers[index]
             
             if correct.contains(word) {
-                layer.fillColor = green
+                layer.fillColor = blue
             } else if incorrect.contains(word) {
-                layer.fillColor = red
+                layer.fillColor = orange
             } else if index == self.index {
-                layer.fillColor = yellow
+                layer.fillColor = UIColor.darkGray.cgColor
             } else {
                 layer.fillColor = UIColor.lightGray.cgColor
             }
