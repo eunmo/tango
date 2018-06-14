@@ -81,7 +81,7 @@ class InitViewController: UIViewController {
             
             for (index, button) in newButtons.enumerated() {
                 let path = NSIndexPath(row: index, section: 0)
-                let text = "\(library.getLevelRemainCount(indexPath: path)) new"
+                let text = "\(library.getLearnRemainCount(indexPath: path)) new"
                 button?.setTitle(text, for: .normal)
                 button?.backgroundColor = (path == selectedLevel) ? UIColor.darkGray : UIColor.lightGray
             }
