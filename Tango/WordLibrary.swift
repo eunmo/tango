@@ -28,7 +28,7 @@ class WordLibrary {
     static let notificationKey = "wordLibraryNotificationKey"
     static let networkNotificationKey = "wordLibraryNetworkNotificationKey"
     
-    static let serverAddress = "http://1.235.106.140:3010"
+    static let serverAddress = "http://52.195.14.242:3020"
     static let languageCount = 3
     static let reviewNames = ["Review", "Revoir", "復習"]
     static let levelToLanguage: [Character: Int] = ["E": 0, "F": 1, "J": 2, "N": 2]
