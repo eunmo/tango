@@ -229,7 +229,7 @@ class WordLibrary {
         for level in levels {
             for word in level.words {
                 
-                json += "{\"Level\":\"\(level.name)\",\"index\":\(word.index),\"streak\":\(word.streak),\"learned\":\(word.learned)"
+                json += "{\"level\":\"\(level.name)\",\"index\":\(word.index),\"streak\":\(word.streak),\"learned\":\(word.learned)"
                 
                 if let lastCorrect = word.lastCorrect {
                     json += ",\"lastCorrect\":\"\(dateFormatter.string(from: lastCorrect))\""
@@ -274,7 +274,7 @@ class WordLibrary {
                 var words = [String:[Word]]()
                 
                 for (_, json) in jsonData {
-                    let level = json["Level"].stringValue
+                    let level = json["level"].stringValue
                     let index = json["index"].intValue
                     let word = json["word"].stringValue
                     let yomigana = json["yomigana"].stringValue
