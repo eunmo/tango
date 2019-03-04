@@ -31,6 +31,8 @@ class InitViewController: UIViewController {
     }
     
     var wordLibrary: WordLibrary?
+    var rowCount = 3
+    var sectionCount = 2
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +60,46 @@ class InitViewController: UIViewController {
         CommonUI.setViewMask(view: japReviewButton, isHollow: false)
         
         updateUI()
+    }
+    
+    func updateSelectedLevel(rowDiff: Int, sectionDiff: Int) {
+        if let cur = selectedLevel {
+            let row = (cur.row + rowDiff + rowCount) % rowCount
+            let section = (cur.section + sectionDiff + sectionCount) % sectionCount
+            selectedLevel = NSIndexPath(row: row, section: section)
+        } else {
+            selectedLevel = NSIndexPath(row: 0, section: 0)
+        }
+    }
+    
+    @objc func upKey() {
+        updateSelectedLevel(rowDiff: -1, sectionDiff: 0)
+    }
+    
+    @objc func leftKey() {
+        updateSelectedLevel(rowDiff: 0, sectionDiff: -1)
+    }
+    
+    @objc func rightKey() {
+        updateSelectedLevel(rowDiff: 0, sectionDiff: 1)
+    }
+    
+    @objc func downKey() {
+        updateSelectedLevel(rowDiff: 1, sectionDiff: 0)
+    }
+    
+    @objc func enterKey() {
+        go()
+    }
+    
+    override var keyCommands: [UIKeyCommand]? {
+        return [
+            UIKeyCommand(input: "2", modifierFlags: .numericPad, action: #selector(downKey), discoverabilityTitle: "Down(2)"),
+            UIKeyCommand(input: "4", modifierFlags: .numericPad, action: #selector(leftKey), discoverabilityTitle: "Left(4)"),
+            UIKeyCommand(input: "5", modifierFlags: .numericPad, action: #selector(enterKey), discoverabilityTitle: "Enter(5)"),
+            UIKeyCommand(input: "6", modifierFlags: .numericPad, action: #selector(rightKey), discoverabilityTitle: "Right(6)"),
+            UIKeyCommand(input: "8", modifierFlags: .numericPad, action: #selector(upKey), discoverabilityTitle: "Up(8)")
+        ]
     }
     
     @objc func receiveNotification() {
@@ -97,6 +139,16 @@ class InitViewController: UIViewController {
         }
     }
     
+    func go() {
+        if let path = selectedLevel {
+            let words = wordLibrary!.getWords(indexPath: path)
+            
+            if words.count > 0 {
+                performSegue(withIdentifier: "Show Words", sender: self)
+            }
+        }
+    }
+    
     @IBAction func engNewButtonPressed(_ sender: UIButton) {
         selectedLevel = NSIndexPath(row: 0, section: 0)
     }
@@ -128,13 +180,7 @@ class InitViewController: UIViewController {
     }
     
     @IBAction func goButtonPressed(_ sender: UIButton) {
-        if let path = selectedLevel {
-            let words = wordLibrary!.getWords(indexPath: path)
-            
-            if words.count > 0 {
-                performSegue(withIdentifier: "Show Words", sender: self)
-            }
-        }
+        go()
     }
     
     func getCellText(indexPath: NSIndexPath) -> String {

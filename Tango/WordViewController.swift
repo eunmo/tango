@@ -72,6 +72,7 @@ class WordViewController: UIViewController {
         CommonUI.setViewMask(view: trueButton, isHollow: true)
         CommonUI.setViewMask(view: falseButton, isHollow: true)
         setupProgressView()
+        
 
         // Do any additional setup after loading the view.
         if words.count > 0 {
@@ -80,10 +81,25 @@ class WordViewController: UIViewController {
             setWord(word: words[0])
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @objc func upKey() {
+        prev()
+    }
+    
+    @objc func leftKey() {
+        handleFalse()
+    }
+    
+    @objc func rightKey() {
+        handleTrue()
+    }
+    
+    override var keyCommands: [UIKeyCommand]? {
+        return [
+            UIKeyCommand(input: "4", modifierFlags: .numericPad, action: #selector(leftKey), discoverabilityTitle: "Left(4)"),
+            UIKeyCommand(input: "6", modifierFlags: .numericPad, action: #selector(rightKey), discoverabilityTitle: "Right(6)"),
+            UIKeyCommand(input: "8", modifierFlags: .numericPad, action: #selector(upKey), discoverabilityTitle: "Up(8)")
+        ]
     }
     
     override func prefersHomeIndicatorAutoHidden() -> Bool {
@@ -237,21 +253,8 @@ class WordViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
-    // MARK: Actions
     
-    @IBAction func negativeButtonPressed(_ sender: UIButton) {
-        if index == words.count {
-        } else if curResult == false {
-            incorrect.append(getWord())
-            next()
-        } else {
-            curResult = false
-            showDetails = true
-        }
-    }
-    
-    @IBAction func positivieButtonPressed(_ sender: UIButton) {
+    func handleTrue() {
         if index == words.count {
             dismiss()
         } else if curResult == true {
@@ -261,6 +264,28 @@ class WordViewController: UIViewController {
             curResult = true
             showDetails = true
         }
+    }
+    
+    func handleFalse() {
+        if index == words.count {
+        } else if curResult == false {
+            incorrect.append(getWord())
+            next()
+        } else {
+            curResult = false
+            showDetails = true
+        }
+    }
+
+    // MARK: Actions
+    
+    
+    @IBAction func negativeButtonPressed(_ sender: UIButton) {
+        handleFalse()
+    }
+    
+    @IBAction func positivieButtonPressed(_ sender: UIButton) {
+        handleTrue()
     }
     
     @IBAction func prevButtonPressed(_ sender: UIButton) {
