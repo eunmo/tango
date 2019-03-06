@@ -40,25 +40,28 @@ class TestInterfaceController: WKInterfaceController {
         }
     }
     
-    func formatMeaningString(meaning: String) -> String {
+    func formatYomiganaString(yomigana: String) -> String {
+        return yomigana == "" ? " " : yomigana
+    }
+    
+    func formatMeaningString(meaning: String) -> NSAttributedString {
         var string = meaning
         
         for i in 2...5 {
             string = string.replacingOccurrences(of: " \(i))", with: "\n\(i))")
         }
         
-        return string;
+        let tok = string.components(separatedBy: "\n")
+        let fontSize = tok.count >= 3 ? 14 : 16
+        
+        return NSAttributedString(string: string, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: CGFloat(fontSize))])
     }
     
     var word: TestWord? {
         didSet {
             wordLabel.setText(word!.word)
-            yomiganaLabel.setText(word!.yomigana)
-            meaningLabel.setText(formatMeaningString(meaning: word!.meaning))
-            
-            if (word!.yomigana == "") {
-                yomiganaLabel.setText(" ")
-            }
+            yomiganaLabel.setText(formatYomiganaString(yomigana: word!.yomigana))
+            meaningLabel.setAttributedText(formatMeaningString(meaning: word!.meaning))
         }
     }
     

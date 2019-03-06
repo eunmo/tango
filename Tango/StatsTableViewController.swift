@@ -47,8 +47,6 @@ class StatsTableViewController: UITableViewController {
         for word in wordsToReview {
             reviewCount[word.streak - min] += 1
         }
-        
-        print("max:\(max) min:\(min)")
     }
 
     override func didReceiveMemoryWarning() {

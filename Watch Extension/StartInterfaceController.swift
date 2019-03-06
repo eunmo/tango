@@ -33,7 +33,9 @@ class TestWord {
 }
 
 class StartInterfaceController: WKInterfaceController {
-
+    
+    var reviewSwitchOn = true
+    
     override func awake(withContext context: Any?) {
         super.awake(withContext: context)
         
@@ -49,31 +51,35 @@ class StartInterfaceController: WKInterfaceController {
         // This method is called when watch view controller is no longer visible
         super.didDeactivate()
     }
+    
+    @IBAction func switchAction(_ value: Bool) {
+        reviewSwitchOn = value
+    }
+    
+    func handleReply(reply: [String: Any]) {
+        if let value = reply["words"] {
+            let array = value as! [[String: Any]]
+            var controllers = [String]()
+            var contexts = [Any]()
+            for (index, word) in array.enumerated() {
+                controllers.append("Test")
+                let level = word["level"] as! String
+                let levelIndex = word["index"] as! Int
+                let yomigana = word["yomigana"] as! String
+                let meaning = word["meaning"] as! String
+                let streak = word["streak"] as! Int
+                let word = word["word"] as! String
+                contexts.append(TestWord(index: index, word: word, level: level, levelIndex: levelIndex, yomigana: yomigana, meaning: meaning, streak: streak))
+            }
+            controllers.append("Done")
+            contexts.append(contexts)
+            self.presentController(withNames: controllers, contexts: contexts)
+        }
+    }
 
     @IBAction func startButtonPressed() {
         let session = WCSession.default
-        
-        session.sendMessage(["request": "test"], replyHandler: { (reply) in
-            if let value = reply["words"] {
-                let array = value as! [[String: Any]]
-                var controllers = [String]()
-                var contexts = [Any]()
-                for (index, word) in array.enumerated() {
-                    controllers.append("Test")
-                    let level = word["level"] as! String
-                    let levelIndex = word["index"] as! Int
-                    let yomigana = word["yomigana"] as! String
-                    let meaning = word["meaning"] as! String
-                    let streak = word["streak"] as! Int
-                    let word = word["word"] as! String
-                    contexts.append(TestWord(index: index, word: word, level: level, levelIndex: levelIndex, yomigana: yomigana, meaning: meaning, streak: streak))
-                }
-                controllers.append("Done")
-                contexts.append(contexts)
-                self.presentController(withNames: controllers, contexts: contexts)
-            }
-        }) { (error) in
-            print(error)
-        }
+        let request = reviewSwitchOn ? "review" : "test"
+        session.sendMessage(["request": request], replyHandler: handleReply)
     }
 }

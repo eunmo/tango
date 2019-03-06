@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14109" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
-    <device id="watch42" orientation="portrait">
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="14460.31" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch44" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="watchOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14031"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="14460.16"/>
     </dependencies>
     <scenes>
         <!--Start Interface Controller-->
@@ -14,6 +14,11 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="StartInterfaceController" customModule="Watch" customModuleProvider="target">
                     <items>
+                        <switch width="1" alignment="left" value="YES" title="Review Only" id="P7m-it-ywx">
+                            <connections>
+                                <action selector="switchAction:" destination="AgC-eL-Hgc" id="P9R-ZU-ep1"/>
+                            </connections>
+                        </switch>
                         <button width="1" alignment="left" verticalAlignment="center" title="Start" id="Pva-kA-rWZ">
                             <connections>
                                 <action selector="startButtonPressed" destination="AgC-eL-Hgc" id="Fl4-YV-CTg"/>
@@ -39,14 +44,14 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="133" y="398"/>
+            <point key="canvasLocation" x="251" y="527"/>
         </scene>
         <!--Test-->
         <scene sceneID="gOQ-aK-Z6V">
             <objects>
                 <controller identifier="Test" id="xNI-2f-IOA" customClass="TestInterfaceController" customModule="Watch_Extension">
                     <items>
-                        <group width="1" height="0.66000000000000003" alignment="left" layout="vertical" spacing="0.0" id="fs4-WH-Z3w">
+                        <group width="1" height="0.69999999999999996" alignment="left" layout="vertical" spacing="0.0" id="fs4-WH-Z3w">
                             <items>
                                 <label alignment="center" text="Label" textAlignment="center" id="uYZ-K9-FR7">
                                     <color key="textColor" red="1" green="0.90196078431372551" blue="0.12549019607843137" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -57,12 +62,13 @@
                                 </label>
                                 <label alignment="center" text="Label" textAlignment="center" numberOfLines="3" id="DqK-Tw-E2A">
                                     <color key="textColor" red="1" green="0.90196078430000004" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleBody"/>
                                 </label>
                             </items>
                         </group>
-                        <group width="1" height="0.33000000000000002" alignment="left" spacing="10" id="bV4-oT-bpD">
+                        <group width="1" height="57" alignment="left" spacing="10" id="bV4-oT-bpD">
                             <items>
-                                <button width="0.5" height="1" alignment="left" title="✗" id="VS4-Rl-4X9">
+                                <button width="0.5" height="72" alignment="left" title="✗" id="VS4-Rl-4X9">
                                     <connections>
                                         <action selector="checkFalsePressed" destination="xNI-2f-IOA" id="iOk-Ig-hEG"/>
                                     </connections>
@@ -73,7 +79,7 @@
                                     </connections>
                                 </button>
                             </items>
-                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="10"/>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                         </group>
                     </items>
                     <connections>
@@ -85,7 +91,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="112" y="235"/>
+            <point key="canvasLocation" x="250.56521739130434" y="255"/>
         </scene>
     </scenes>
 </document>

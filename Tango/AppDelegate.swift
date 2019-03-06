@@ -66,7 +66,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         let request = message["request"] as! String
         var reply = [String: Any]()
         
-        if (request == "test") {
+        if (request == "review") {
+            reply["words"] = wordLibrary.getReviewMaterial() as Any
+        } else if (request == "test") {
             reply["words"] = wordLibrary.getTestMaterial() as Any
         } else if (request == "commit") {
             let words = message["words"] as! [[String: Any]]
@@ -76,4 +78,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         replyHandler(reply)
     }
 }
-
