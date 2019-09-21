@@ -54,7 +54,7 @@ class TestInterfaceController: WKInterfaceController {
         let tok = string.components(separatedBy: "\n")
         let fontSize = tok.count >= 3 ? 14 : 16
         
-        return NSAttributedString(string: string, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: CGFloat(fontSize))])
+        return NSAttributedString(string: string, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: CGFloat(fontSize))])
     }
     
     var word: TestWord? {

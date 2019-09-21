@@ -102,7 +102,7 @@ class WordViewController: UIViewController {
         ]
     }
     
-    override func prefersHomeIndicatorAutoHidden() -> Bool {
+    override var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
     
@@ -116,7 +116,7 @@ class WordViewController: UIViewController {
             let x = CGFloat(i) * (diameter + space) + offset / 2
             let rect = CGRect(x: x, y: 10, width: diameter, height: diameter)
             layer.path = UIBezierPath(ovalIn: rect).cgPath
-            layer.fillColor = UIColor.gray.cgColor
+            layer.fillColor = UIColor.systemGray.cgColor
             layers.append(layer)
             progressButton.layer.addSublayer(layer)
         }
@@ -131,9 +131,9 @@ class WordViewController: UIViewController {
             } else if incorrect.contains(word) {
                 layer.fillColor = orange
             } else if index == self.index {
-                layer.fillColor = UIColor.darkGray.cgColor
+                layer.fillColor = UIColor.label.cgColor
             } else {
-                layer.fillColor = UIColor.lightGray.cgColor
+                layer.fillColor = UIColor.systemGray.cgColor
             }
         }
     }
@@ -198,8 +198,8 @@ class WordViewController: UIViewController {
             let endWord = Word(index: 0, word: title, yomigana: "", meaning: "")!
             setWord(word: endWord)
         } else {
-            let alertController = UIAlertController(title: "\(incorrect.count)/\(words.count) wrong", message: "", preferredStyle: UIAlertControllerStyle.alert)
-            alertController.addAction(UIAlertAction(title: "Restart", style: UIAlertActionStyle.default, handler: restart))
+            let alertController = UIAlertController(title: "\(incorrect.count)/\(words.count) wrong", message: "", preferredStyle: UIAlertController.Style.alert)
+            alertController.addAction(UIAlertAction(title: "Restart", style: UIAlertAction.Style.default, handler: restart))
             present(alertController, animated: true, completion: nil)
         }
     }

@@ -125,7 +125,7 @@ class InitViewController: UIViewController {
                 let path = NSIndexPath(row: index, section: 0)
                 let text = "\(library.getLearnRemainCount(indexPath: path)) new"
                 button?.setTitle(text, for: .normal)
-                button?.backgroundColor = (path == selectedLevel) ? UIColor.darkGray : UIColor.lightGray
+                button?.backgroundColor = (path == selectedLevel) ? UIColor.systemBlue : UIColor.systemGray
             }
             
             let reviewButtons = [engReviewButton, fraReviewButton, japReviewButton]
@@ -134,7 +134,7 @@ class InitViewController: UIViewController {
                 let path = NSIndexPath(row: index, section: 1)
                 let text = "\(library.getReviewRemainCount(indexPath: path))"
                 button?.setTitle(text, for: .normal)
-                button?.backgroundColor = (path == selectedLevel) ? UIColor.darkGray : UIColor.lightGray
+                button?.backgroundColor = (path == selectedLevel) ? UIColor.systemBlue : UIColor.systemGray
             }
         }
     }
