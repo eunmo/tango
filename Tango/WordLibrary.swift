@@ -28,16 +28,10 @@ class WordLibrary {
     static let notificationKey = "wordLibraryNotificationKey"
     static let networkNotificationKey = "wordLibraryNetworkNotificationKey"
     
-    static let serverAddress = "http://13.230.33.104:3020"
+    static let serverAddress = "http://eunmo.be:3020"
     static let languageCount = 3
     static let reviewNames = ["Review", "Revoir", "復習"]
     static let levelToLanguage: [Character: Int] = ["E": 0, "F": 1, "J": 2, "N": 2]
-    /*
-    static let serverAddress = "http://211.200.135.97:3011"
-    static let languageCount = 1
-    static let reviewNames = ["Review"]
-    static let levelToLanguage: [Character: Int] = ["S": 0]
-    */
     
     init() {
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
@@ -256,7 +250,7 @@ class WordLibrary {
     }
     
     func sync() {
-        let urlAsString = WordLibrary.serverAddress + "/sync"
+        let urlAsString = WordLibrary.serverAddress + "/api/sync"
         let url = URL(string: urlAsString)!
         let urlSession = URLSession.shared
         
